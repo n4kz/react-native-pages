@@ -39,6 +39,13 @@ Easy to use page view component for React Native
 npm install --save react-native-pages
 ```
 
+## Properties
+
+name                 | description                               | type     | default
+-------------------- | ----------------------------------------- | --------:| ------------------
+indicatorColor       | Page indicator color                      |   String | rgb(255, 255, 255)
+indicatorOpacity     | Page indicator opacity (inactive dots)    |   String | 0.30
+
 ## Copyright and License
 
 BSD License
