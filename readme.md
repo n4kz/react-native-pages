@@ -22,7 +22,6 @@ Easy to use page view component for React Native
 
 ### 0.1.0
 
-* Configurable scroll direction
 * Configurable page indicator position
 * Page change callback
 * Example
@@ -64,6 +63,7 @@ name                 | description                               | type     | de
 -------------------- | ----------------------------------------- | --------:| ------------------
 indicatorColor       | Page indicator color                      |   String | rgb(255, 255, 255)
 indicatorOpacity     | Page indicator opacity (inactive dots)    |   String | 0.30
+horizontal           | Scroll direction                          |  Boolean | true
 
 ## Copyright and License
 
