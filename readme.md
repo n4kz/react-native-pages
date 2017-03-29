@@ -15,6 +15,7 @@ Easy to use page view component for React Native
 * Easy to use 
 * Consistent look and feel on iOS and Android
 * Landscape and portrait orientation support
+* Configurable scroll direction
 * Animated page indicator
 * Pure javascript implementation
 
@@ -48,9 +49,9 @@ class Example extends Component {
   render() {
     return (
       <Pages>
-		<View style={{ flex: 1, backgroundColor: 'red' }} />
-		<View style={{ flex: 1, backgroundColor: 'green' }} />
-		<View style={{ flex: 1, backgroundColor: 'blue' }} />
+        <View style={{ flex: 1, backgroundColor: 'red' }} />
+        <View style={{ flex: 1, backgroundColor: 'green' }} />
+        <View style={{ flex: 1, backgroundColor: 'blue' }} />
       <Pages/>
     );
   }
