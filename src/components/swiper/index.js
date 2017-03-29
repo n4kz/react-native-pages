@@ -65,9 +65,7 @@ export default class Swiper extends Component {
     let { width, height, progress } = this.state;
 
     let pages = [].concat(children)
-      .map((child, page) => {
-        let { key = page } = child.props;
-
+      .map((child, key) => {
         return (
           <View style={{ width, height }} key={key}>
             {child}
