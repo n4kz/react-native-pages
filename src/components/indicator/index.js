@@ -7,11 +7,12 @@ export default class Indicator extends Component {
   static propTypes = {
     color: PropTypes.string.isRequired,
     count: PropTypes.number.isRequired,
+    alpha: PropTypes.number.isRequired,
     index: PropTypes.instanceOf(Animated.Value).isRequired,
   };
 
   render() {
-    let { count, index, color } = this.props;
+    let { count, index, color, alpha } = this.props;
     let dots = [];
 
     for (let i = 0; i < count; i++) {
@@ -21,7 +22,7 @@ export default class Indicator extends Component {
       let opacity = index
         .interpolate({
           inputRange: [-1, mn, i, mx, count],
-          outputRange: [0.5, 0.5, 1.0, 0.5, 0.5],
+          outputRange: [alpha, alpha, 1.0, alpha, alpha],
         });
 
       let dotStyle = {

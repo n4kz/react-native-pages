@@ -13,12 +13,14 @@ export default class Swiper extends Component {
     scrollEventThrottle: 32,
 
     indicatorColor: 'rgb(255, 255, 255)',
+    indicatorOpacity: 0.30,
   };
 
   static propTypes = {
     ...ScrollView.propTypes,
 
     indicatorColor: PropTypes.string,
+    indicatorOpacity: PropTypes.number,
 
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -65,8 +67,13 @@ export default class Swiper extends Component {
   }
 
   render() {
-    let { children = [], indicatorColor, ...props } = this.props;
     let { width, height, progress } = this.state;
+    let {
+      children = [],
+      indicatorColor,
+      indicatorOpacity,
+      ...props
+    } = this.props;
 
     let pages = [].concat(children)
       .map((child, key) => {
@@ -93,6 +100,7 @@ export default class Swiper extends Component {
             index={progress}
             count={pages.length}
             color={indicatorColor}
+            alpha={indicatorOpacity}
           />
         </View>
       </View>
