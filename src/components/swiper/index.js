@@ -44,11 +44,12 @@ export default class Swiper extends Component {
   }
 
   componentDidUpdate() {
-    let { width } = this.state;
+    let { horizontal } = this.props;
+    let { [horizontal? 'width' : 'height']: base } = this.state;
 
     /* Fix scroll position after layout update */
     this.refs.scroll.scrollTo({
-      x: Math.floor(this.progress) * width,
+      [horizontal? 'x' : 'y']: Math.floor(this.progress) * base,
       animated: false,
     });
   }
@@ -60,10 +61,11 @@ export default class Swiper extends Component {
   }
 
   onScroll(event) {
-    let { x } = event.nativeEvent.contentOffset;
-    let { width, progress } = this.state;
+    let { horizontal } = this.props;
+    let { [horizontal? 'x' : 'y']: offset } = event.nativeEvent.contentOffset;
+    let { [horizontal? 'width' : 'height']: base, progress } = this.state;
 
-    progress.setValue(this.progress = width? x / width : 0);
+    progress.setValue(this.progress = base? offset / base : 0);
   }
 
   render() {
