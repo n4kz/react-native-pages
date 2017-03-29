@@ -24,6 +24,7 @@ Easy to use page view component for React Native
 
 * Configurable scroll direction
 * Configurable page indicator position
+* Page change callback
 * Example
 * Documentation
 
