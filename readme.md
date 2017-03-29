@@ -63,7 +63,7 @@ class Example extends Component {
 name                 | description                               | type     | default
 -------------------- | ----------------------------------------- | --------:| ------------------
 indicatorColor       | Page indicator color                      |   String | rgb(255, 255, 255)
-indicatorOpacity     | Page indicator opacity (inactive dots)    |   String | 0.30
+indicatorOpacity     | Page indicator opacity (inactive dots)    |   Number | 0.30
 horizontal           | Scroll direction                          |  Boolean | true
 
 ## Copyright and License
