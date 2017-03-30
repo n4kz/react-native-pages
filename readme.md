@@ -12,10 +12,11 @@ Easy to use page view component for React Native
 
 ## Features
 
-* Easy to use 
+* Easy to use
 * Consistent look and feel on iOS and Android
 * Landscape and portrait orientation support
 * Configurable scroll direction
+* Configurable page indicator position, color and opacity
 * Animated page indicator
 * Pure javascript implementation
 
@@ -23,7 +24,6 @@ Easy to use page view component for React Native
 
 ### 0.1.0
 
-* Configurable page indicator position
 * Page change callback
 * Example
 * Documentation
@@ -31,7 +31,7 @@ Easy to use page view component for React Native
 ### 0.2.0
 
 * Parallax support
-* Customizable page indicator
+* Custom page indicator
 
 ## Installation
 
@@ -61,10 +61,11 @@ class Example extends Component {
 ## Properties
 
 name                 | description                               | type     | default
--------------------- | ----------------------------------------- | --------:| ------------------
+-------------------- | ----------------------------------------- | --------:| --------------------------
+horizontal           | Scroll direction                          |  Boolean | true
 indicatorColor       | Page indicator color                      |   String | rgb(255, 255, 255)
 indicatorOpacity     | Page indicator opacity (inactive dots)    |   Number | 0.30
-horizontal           | Scroll direction                          |  Boolean | true
+indicatorPosition    | Page indicator position                   |   String | horizontal? bottom : right
 
 ## Copyright and License
 
