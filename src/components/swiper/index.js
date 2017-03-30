@@ -21,6 +21,13 @@ export default class Swiper extends Component {
 
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
+    indicatorPosition: PropTypes.oneOf([
+      'none',
+      'top',
+      'right',
+      'bottom',
+      'left',
+    ]),
 
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -68,12 +75,43 @@ export default class Swiper extends Component {
     progress.setValue(this.progress = base? offset / base : 0);
   }
 
+  renderPager(pager) {
+    let {
+      pages,
+      progress,
+      indicatorColor,
+      indicatorOpacity,
+      indicatorPosition,
+    } = pager;
+
+    if ('none' === indicatorPosition) {
+      return null;
+    }
+
+    let horizontal = /^(top|bottom)$/
+      .test(indicatorPosition);
+
+    return (
+      <View style={styles[indicatorPosition]}>
+        <Indicator
+          index={progress}
+          count={pages.length}
+          color={indicatorColor}
+          alpha={indicatorOpacity}
+          horizontal={horizontal}
+        />
+      </View>
+    );
+  }
+
   render() {
     let { width, height, progress } = this.state;
+    let { horizontal } = this.props;
     let {
       children = [],
       indicatorColor,
       indicatorOpacity,
+      indicatorPosition = horizontal? 'bottom' : 'right',
       ...props
     } = this.props;
 
@@ -84,6 +122,15 @@ export default class Swiper extends Component {
             {child}
           </View>
         );
+      });
+
+    let Pager = () =>
+      this.renderPager({
+        pages,
+        progress,
+        indicatorColor,
+        indicatorOpacity,
+        indicatorPosition,
       });
 
     return (
@@ -97,14 +144,7 @@ export default class Swiper extends Component {
           {pages}
         </ScrollView>
 
-        <View style={styles.pager}>
-          <Indicator
-            index={progress}
-            count={pages.length}
-            color={indicatorColor}
-            alpha={indicatorOpacity}
-          />
-        </View>
+        <Pager />
       </View>
     );
   }

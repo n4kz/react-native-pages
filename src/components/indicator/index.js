@@ -9,10 +9,11 @@ export default class Indicator extends Component {
     count: PropTypes.number.isRequired,
     alpha: PropTypes.number.isRequired,
     index: PropTypes.instanceOf(Animated.Value).isRequired,
+    horizontal: PropTypes.bool.isRequired,
   };
 
   render() {
-    let { count, index, color, alpha } = this.props;
+    let { count, index, color, alpha, horizontal } = this.props;
     let dots = [];
 
     for (let i = 0; i < count; i++) {
@@ -35,8 +36,10 @@ export default class Indicator extends Component {
       );
     }
 
+    let flexDirection = horizontal? 'row' : 'column';
+
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { flexDirection }]}>
         {dots}
       </View>
     );
