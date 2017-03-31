@@ -11,6 +11,7 @@ export default class Swiper extends PureComponent {
     showsHorizontalScrollIndicator: false,
     showsVerticalScrollIndicator: false,
     scrollEventThrottle: 32,
+    scrollsToTop: false,
 
     indicatorColor: 'rgb(255, 255, 255)',
     indicatorOpacity: 0.30,
