@@ -1,10 +1,10 @@
-import React, { PropTypes, Component } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { View, ScrollView, Animated } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
 
-export default class Swiper extends Component {
+export default class Swiper extends PureComponent {
   static defaultProps = {
     horizontal: true,
     pagingEnabled: true,
