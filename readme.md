@@ -24,7 +24,6 @@ Easy to use page view component for React Native
 
 ### 0.1.0
 
-* Example
 * Documentation
 
 ### 0.2.0
@@ -66,6 +65,15 @@ indicatorColor       | Page indicator color                      |   String | rg
 indicatorOpacity     | Page indicator opacity (inactive dots)    |   Number | 0.30
 indicatorPosition    | Page indicator position                   |   String | horizontal? bottom : right
 onScrollEnd          | Scroll end callback                       | Function | -
+
+## Example
+
+```bash
+git clone https://github.com/n4kz/react-native-pages
+cd react-native-pages/example
+npm install
+react-native run-ios # or run-android
+```
 
 ## Copyright and License
 
