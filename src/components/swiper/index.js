@@ -34,6 +34,8 @@ export default class Swiper extends PureComponent {
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
     ]),
+
+    onScrollEnd: PropTypes.func,
   };
 
   constructor(props) {
@@ -41,8 +43,12 @@ export default class Swiper extends PureComponent {
 
     this.onLayout = this.onLayout.bind(this);
     this.onScroll = this.onScroll.bind(this);
+    this.onScrollBeginDrag = this.onScrollBeginDrag.bind(this);
+    this.onScrollEndDrag = this.onScrollEndDrag.bind(this);
+    this.onScrollEnd = this.onScrollEnd.bind(this);
 
     this.progress = 0;
+    this.scrollState = -1;
 
     this.state = {
       width: 0,
@@ -74,6 +80,28 @@ export default class Swiper extends PureComponent {
     let { [horizontal? 'width' : 'height']: base, progress } = this.state;
 
     progress.setValue(this.progress = base? offset / base : 0);
+
+    if (1 === this.scrollState && !(offset % base)) {
+      this.onScrollEnd();
+
+      this.scrollState = -1;
+    }
+  }
+
+  onScrollBeginDrag() {
+    this.scrollState = 0;
+  }
+
+  onScrollEndDrag() {
+    this.scrollState = 1;
+  }
+
+  onScrollEnd() {
+    let { onScrollEnd } = this.props;
+
+    if (typeof onScrollEnd === 'function') {
+      onScrollEnd();
+    }
   }
 
   renderPager(pager) {
@@ -140,6 +168,8 @@ export default class Swiper extends PureComponent {
           {...props}
           onLayout={this.onLayout}
           onScroll={this.onScroll}
+          onScrollBeginDrag={this.onScrollBeginDrag}
+          onScrollEndDrag={this.onScrollEndDrag}
           ref='scroll'
         >
           {pages}
