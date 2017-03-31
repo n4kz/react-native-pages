@@ -96,7 +96,7 @@ export default class Swiper extends PureComponent {
       <View style={styles[indicatorPosition]}>
         <Indicator
           index={progress}
-          count={pages.length}
+          count={pages}
           color={indicatorColor}
           alpha={indicatorOpacity}
           horizontal={horizontal}
@@ -127,7 +127,7 @@ export default class Swiper extends PureComponent {
 
     let Pager = () =>
       this.renderPager({
-        pages,
+        pages: pages.length,
         progress,
         indicatorColor,
         indicatorOpacity,
