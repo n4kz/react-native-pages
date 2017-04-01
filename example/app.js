@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppRegistry, StatusBar, View, Image, Text, Platform } from 'react-native';
+import { AppRegistry, StatusBar, View, Image, Animated, Platform } from 'react-native';
 import { Pages } from 'react-native-pages';
 
 let imageStyle = {
@@ -12,10 +12,12 @@ let imageStyle = {
 let viewStyle = {
   flex: 1,
   justifyContent: 'center',
+  alignItems: 'center',
+  overflow: 'hidden',
 };
 
 let textStyle = {
-  textAlign: 'center',
+  backgroundColor: 'transparent',
   fontSize: 52,
 };
 
@@ -24,31 +26,88 @@ Platform.select({
   android: () => StatusBar.setBackgroundColor('#263238'),
 })();
 
+/* eslint-disable react/prop-types */
+
+let Label = ({ color, backgroundColor, text, effect, progress }) => {
+  let style = { ...textStyle, color };
+
+  switch (effect) {
+    case 'skew':
+      style.transform = [{
+        skewX: progress.interpolate({
+          inputRange: [-0.75, 0, 0.75],
+          outputRange: ['45deg', '0deg', '-45deg'],
+        }),
+      }];
+      break;
+
+    case 'rise':
+      style.transform = [{
+        translateY: progress.interpolate({
+          inputRange: [-0.5, 0, 0.5],
+          outputRange: [50, 0, -50],
+        }),
+      }];
+
+      style.opacity = progress.interpolate({
+        inputRange: [-0.5, 0, 0.5],
+        outputRange: [0, 1, 0],
+      });
+      break;
+
+    case 'zoom':
+      style.transform = [{
+        scale: progress.interpolate({
+          inputRange: [-1, 0, 1],
+          outputRange: [4, 1, 0],
+        }),
+      }];
+
+      style.opacity = progress.interpolate({
+        inputRange: [-0.25, 0, 1],
+        outputRange: [0, 1, 1],
+      });
+      break;
+
+    case 'flip':
+      style.transform = [{
+        rotate: progress.interpolate({
+          inputRange: [-1, 0, 1],
+          outputRange: ['360deg', '0deg', '-360deg'],
+        }),
+      }];
+      break;
+
+    case 'slide':
+      style.transform = [{
+        translateX: progress.interpolate({
+          inputRange: [-1, 0, 1],
+          outputRange: [-100, 0, 100],
+        }),
+      }];
+      break;
+  }
+
+  return (
+    <View style={[viewStyle, { backgroundColor }]}>
+      <Animated.Text style={style}>{text}</Animated.Text>
+    </View>
+  );
+};
+
+/* eslint-enable */
+
 export default function init() {
   class Example extends Component {
     render() {
       return (
-        <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#263238' }}>
+        <View style={{ flex: 1, backgroundColor: '#263238' }}>
           <Pages>
-            <View style={[viewStyle, { backgroundColor: '#607D8B' }]}>
-              <Text style={[textStyle, { color: '#FFF59D' }]}>move</Text>
-            </View>
-
-            <View style={[viewStyle, { backgroundColor: '#546E7A' }]}>
-              <Text style={[textStyle, { color: '#B2FF59' }]}>fast</Text>
-            </View>
-
-            <View style={[viewStyle, { backgroundColor: '#455A64' }]}>
-              <Text style={[textStyle, { color: '#81D4FA' }]}>and</Text>
-            </View>
-
-            <View style={[viewStyle, { backgroundColor: '#37474F' }]}>
-              <Text style={[textStyle, { color: '#F44336' }]}>break</Text>
-            </View>
-
-            <View style={[viewStyle, { backgroundColor: '#263238' }]}>
-              <Text style={[textStyle, { color: '#FF9100' }]}>things</Text>
-            </View>
+            <Label color='#FFF59D' backgroundColor='#607D8B' text='move' effect='skew' />
+            <Label color='#B2FF59' backgroundColor='#546E7A' text='fast' effect='rise' />
+            <Label color='#81D4FA' backgroundColor='#455A64' text='and'  effect='zoom' />
+            <Label color='#F44336' backgroundColor='#37474F' text='break' effect='flip' />
+            <Label color='#FF9100' backgroundColor='#263238' text='things' effect='slide' />
           </Pages>
 
           <Pages horizontal={false} indicatorPosition='left' indicatorColor='#FF9100' indicatorOpacity={0.54}>
