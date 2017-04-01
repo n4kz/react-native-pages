@@ -24,14 +24,14 @@ Easy to use page view component for React Native
 
 ## Roadmap
 
-### 0.1.0
-
-* Documentation
-
 ### 0.2.0
 
-* Parallax support
 * Custom page indicator
+* Methods next(), prev() and currentPage()
+
+### 0.3.0
+
+* Parallax support
 
 ## Installation
 
@@ -52,7 +52,7 @@ class Example extends Component {
         <View style={{ flex: 1, backgroundColor: 'red' }} />
         <View style={{ flex: 1, backgroundColor: 'green' }} />
         <View style={{ flex: 1, backgroundColor: 'blue' }} />
-      <Pages/>
+      </Pages>
     );
   }
 }
