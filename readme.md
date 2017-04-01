@@ -10,6 +10,8 @@
 
 Easy to use page view component for React Native
 
+![example](https://cloud.githubusercontent.com/assets/2055622/24577964/2eb771f0-16e0-11e7-9694-a0200716dd56.gif)
+
 ## Features
 
 * Easy to use
