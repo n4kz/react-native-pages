@@ -1,5 +1,5 @@
 import React, { PropTypes, PureComponent } from 'react';
-import { View, ScrollView, Animated } from 'react-native';
+import { View, ScrollView, Animated, Platform } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -97,6 +97,18 @@ export default class Swiper extends PureComponent {
   }
 
   onScrollEndDrag() {
+    let { horizontal } = this.props;
+
+    /* Vertical pagination is not working on android, scroll by hands */
+    if ('android' === Platform.OS && !horizontal) {
+      let { height } = this.state;
+
+      this.refs.scroll.scrollTo({
+        y: Math.round(this.progress) * height,
+        animated: true,
+      });
+    }
+
     this.scrollState = 1;
   }
 
