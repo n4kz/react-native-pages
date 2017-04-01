@@ -1,4 +1,4 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, PureComponent, Children } from 'react';
 import { View, ScrollView, Animated, Platform } from 'react-native';
 
 import Indicator from '../indicator';
@@ -10,7 +10,7 @@ export default class Swiper extends PureComponent {
     pagingEnabled: true,
     showsHorizontalScrollIndicator: false,
     showsVerticalScrollIndicator: false,
-    scrollEventThrottle: 32,
+    scrollEventThrottle: 30,
     scrollsToTop: false,
 
     style: styles.container,
@@ -154,25 +154,23 @@ export default class Swiper extends PureComponent {
     let { horizontal } = this.props;
     let {
       style,
-      children = [],
+      children,
       indicatorColor,
       indicatorOpacity,
       indicatorPosition = horizontal? 'bottom' : 'right',
       ...props
     } = this.props;
 
-    let pages = [].concat(children)
-      .map((child, key) => {
-        return (
-          <View style={{ width, height }} key={key}>
-            {child}
-          </View>
-        );
-      });
+    let pages = Children
+      .map(children, (child, index) => (
+        <View style={{ width, height }}>
+          {React.cloneElement(child, { progress: Animated.add(progress, -index) })}
+        </View>
+      ));
 
     let Pager = () =>
       this.renderPager({
-        pages: pages.length,
+        pages: Children.count(children),
         progress,
         indicatorColor,
         indicatorOpacity,
