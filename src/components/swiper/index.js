@@ -13,12 +13,16 @@ export default class Swiper extends PureComponent {
     scrollEventThrottle: 32,
     scrollsToTop: false,
 
+    style: styles.container,
+
     indicatorColor: 'rgb(255, 255, 255)',
     indicatorOpacity: 0.30,
   };
 
   static propTypes = {
     ...ScrollView.propTypes,
+
+    style: View.propTypes.style,
 
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
@@ -137,6 +141,7 @@ export default class Swiper extends PureComponent {
     let { width, height, progress } = this.state;
     let { horizontal } = this.props;
     let {
+      style,
       children = [],
       indicatorColor,
       indicatorOpacity,
@@ -163,9 +168,10 @@ export default class Swiper extends PureComponent {
       });
 
     return (
-      <View style={styles.container}>
+      <View style={style}>
         <ScrollView
           {...props}
+          style={styles.container}
           onLayout={this.onLayout}
           onScroll={this.onScroll}
           onScrollBeginDrag={this.onScrollBeginDrag}

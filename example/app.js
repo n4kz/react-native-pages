@@ -29,7 +29,7 @@ export default function init() {
     render() {
       return (
         <View style={{ flex: 1, flexDirection: 'column', backgroundColor: '#263238' }}>
-          <Pages style={{ flex: 6 }}>
+          <Pages>
             <View style={[viewStyle, { backgroundColor: '#607D8B' }]}>
               <Text style={[textStyle, { color: '#FFF59D' }]}>move</Text>
             </View>
@@ -51,7 +51,7 @@ export default function init() {
             </View>
           </Pages>
 
-          <Pages style={{ flex: 2 }} horizontal={false} indicatorPosition='left' indicatorColor='#FF9100' indicatorOpacity={0.54}>
+          <Pages horizontal={false} indicatorPosition='left' indicatorColor='#FF9100' indicatorOpacity={0.54}>
             <Image source={require('./assets/b-1.png')} style={imageStyle} />
             <Image source={require('./assets/b-2.png')} style={imageStyle} />
             <Image source={require('./assets/b-3.png')} style={imageStyle} />
