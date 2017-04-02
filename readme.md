@@ -26,12 +26,8 @@ Easy to use page view component for React Native
 
 ### 0.2.0
 
-* Custom page indicator
-* Methods next(), prev() and currentPage()
-
-### 0.3.0
-
 * Parallax support
+* Methods next(), prev() and currentPage()
 
 ## Installation
 
@@ -67,6 +63,7 @@ indicatorColor       | Page indicator color                      |   String | rg
 indicatorOpacity     | Page indicator opacity (inactive dots)    |   Number | 0.30
 indicatorPosition    | Page indicator position                   |   String | horizontal? bottom : right
 onScrollEnd          | Scroll end callback                       | Function | -
+renderPager          | Render pager callback                     | Function | -
 
 ## Example
 
