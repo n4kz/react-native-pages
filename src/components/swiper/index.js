@@ -40,6 +40,7 @@ export default class Swiper extends PureComponent {
     ]),
 
     onScrollEnd: PropTypes.func,
+    renderPager: PropTypes.func,
   };
 
   constructor(props) {
@@ -121,6 +122,12 @@ export default class Swiper extends PureComponent {
   }
 
   renderPager(pager) {
+    let { renderPager } = this.props;
+
+    if ('function' === typeof renderPager) {
+      return renderPager(pager);
+    }
+
     let {
       pages,
       progress,
