@@ -50,7 +50,6 @@ export default class Swiper extends PureComponent {
     this.onScroll = this.onScroll.bind(this);
     this.onScrollBeginDrag = this.onScrollBeginDrag.bind(this);
     this.onScrollEndDrag = this.onScrollEndDrag.bind(this);
-    this.onScrollEnd = this.onScrollEnd.bind(this);
 
     this.progress = 0;
     this.scrollState = -1;
@@ -92,7 +91,7 @@ export default class Swiper extends PureComponent {
     progress.setValue(this.progress = base? offset / base : 0);
 
     if (1 === this.scrollState && !(offset % base)) {
-      this.onScrollEnd();
+      this.onScrollEnd(progress);
 
       this.scrollState = -1;
     }
@@ -118,11 +117,11 @@ export default class Swiper extends PureComponent {
     this.scrollState = 1;
   }
 
-  onScrollEnd() {
+  onScrollEnd(page) {
     let { onScrollEnd } = this.props;
 
-    if (typeof onScrollEnd === 'function') {
-      onScrollEnd();
+    if ('function' === typeof onScrollEnd) {
+      onScrollEnd(page);
     }
   }
 
