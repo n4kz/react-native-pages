@@ -75,6 +75,11 @@ export default class Swiper extends PureComponent {
 
   onLayout(event) {
     let { width, height } = event.nativeEvent.layout;
+    let { onLayout } = this.props;
+
+    if ('function' === typeof onLayout) {
+      onLayout(event);
+    }
 
     this.setState({ width, height });
   }
