@@ -71,7 +71,7 @@ renderPager          | Render pager callback                     | Function | -
 git clone https://github.com/n4kz/react-native-pages
 cd react-native-pages/example
 npm install
-react-native run-ios # or run-android
+npm run ios # or npm run android
 ```
 
 ## Copyright and License
