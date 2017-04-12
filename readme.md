@@ -22,13 +22,6 @@ Easy to use page view component for React Native
 * Animated page indicator
 * Pure javascript implementation
 
-## Roadmap
-
-### 0.2.0
-
-* Parallax support
-* Methods next(), prev() and currentPage()
-
 ## Installation
 
 ```bash
