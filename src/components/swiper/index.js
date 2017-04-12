@@ -62,14 +62,10 @@ export default class Swiper extends PureComponent {
   }
 
   componentDidUpdate() {
-    let { horizontal } = this.props;
-    let { [horizontal? 'width' : 'height']: base } = this.state;
-
-    /* Fix scroll position after layout update */
-    this.refs.scroll.scrollTo({
-      [horizontal? 'x' : 'y']: Math.floor(this.progress) * base,
-      animated: false,
-    });
+    if (-1 === this.scrollState) {
+      /* Fix scroll position after layout update */
+      this.scrollToPage(Math.floor(this.progress), false);
+    }
   }
 
   onLayout(event) {
@@ -106,12 +102,7 @@ export default class Swiper extends PureComponent {
 
     /* Vertical pagination is not working on android, scroll by hands */
     if ('android' === Platform.OS && !horizontal) {
-      let { height } = this.state;
-
-      this.refs.scroll.scrollTo({
-        y: Math.round(this.progress) * height,
-        animated: true,
-      });
+      this.scrollToPage(Math.round(this.progress));
     }
 
     this.scrollState = 1;
@@ -123,6 +114,16 @@ export default class Swiper extends PureComponent {
     if ('function' === typeof onScrollEnd) {
       onScrollEnd(page);
     }
+  }
+
+  scrollToPage(page, animated = true) {
+    let { horizontal } = this.props;
+    let { [horizontal? 'width' : 'height']: base } = this.state;
+
+    this.refs.scroll.scrollTo({
+      [horizontal? 'x' : 'y']: page * base,
+      animated,
+    });
   }
 
   renderPager(pager) {
