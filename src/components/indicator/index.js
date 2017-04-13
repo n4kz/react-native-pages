@@ -5,24 +5,24 @@ import styles from './styles.js';
 
 export default class Indicator extends PureComponent {
   static propTypes = {
+    pages: PropTypes.number.isRequired,
     color: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
     alpha: PropTypes.number.isRequired,
-    index: PropTypes.instanceOf(Animated.Value).isRequired,
+    progress: PropTypes.instanceOf(Animated.Value).isRequired,
     horizontal: PropTypes.bool.isRequired,
   };
 
   render() {
-    let { count, index, color, alpha, horizontal } = this.props;
+    let { pages, color, alpha, progress, horizontal } = this.props;
     let dots = [];
 
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < pages; i++) {
       let mn = i - 1;
       let mx = i + 1;
 
-      let opacity = index
+      let opacity = progress
         .interpolate({
-          inputRange: [-1, mn, i, mx, count],
+          inputRange: [-1, mn, i, mx, pages],
           outputRange: [alpha, alpha, 1.0, alpha, alpha],
         });
 

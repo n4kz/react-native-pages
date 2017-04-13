@@ -151,10 +151,10 @@ export default class Swiper extends PureComponent {
     return (
       <View style={styles[indicatorPosition]}>
         <Indicator
-          index={progress}
-          count={pages}
+          pages={pages}
           color={indicatorColor}
           alpha={indicatorOpacity}
+          progress={progress}
           horizontal={horizontal}
         />
       </View>
