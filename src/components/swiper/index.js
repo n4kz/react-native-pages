@@ -51,6 +51,8 @@ export default class Swiper extends PureComponent {
     this.onScrollBeginDrag = this.onScrollBeginDrag.bind(this);
     this.onScrollEndDrag = this.onScrollEndDrag.bind(this);
 
+    this.renderPage = this.renderPage.bind(this);
+
     this.progress = 0;
     this.scrollState = -1;
 
@@ -126,6 +128,19 @@ export default class Swiper extends PureComponent {
     });
   }
 
+  renderPage(page, index) {
+    let { width, height, progress } = this.state;
+
+    /* Adjust progress by page index */
+    progress = Animated.add(progress, -index);
+
+    return (
+      <View style={{ width, height }}>
+        {React.cloneElement(page, { progress })}
+      </View>
+    );
+  }
+
   renderPager(pager) {
     let { renderPager } = this.props;
 
@@ -173,16 +188,11 @@ export default class Swiper extends PureComponent {
       ...props
     } = this.props;
 
-    let pages = Children
-      .map(children, (child, index) => (
-        <View style={{ width, height }}>
-          {React.cloneElement(child, { progress: Animated.add(progress, -index) })}
-        </View>
-      ));
+    let pages = Children.count(children);
 
     let Pager = () =>
       this.renderPager({
-        pages: Children.count(children),
+        pages,
         progress,
         indicatorColor,
         indicatorOpacity,
@@ -200,7 +210,7 @@ export default class Swiper extends PureComponent {
           onScrollEndDrag={this.onScrollEndDrag}
           ref='scroll'
         >
-          {pages}
+          {Children.map(children, this.renderPage)}
         </ScrollView>
 
         <Pager />
