@@ -18,7 +18,13 @@ let viewStyle = {
 
 let textStyle = {
   backgroundColor: 'transparent',
+  textAlign: 'center',
   fontSize: 52,
+};
+
+let indexStyle = {
+  fontSize: 10,
+  color: 'rgba(255, 255, 255, .63)',
 };
 
 Platform.select({
@@ -28,7 +34,7 @@ Platform.select({
 
 /* eslint-disable react/prop-types */
 
-let Label = ({ color, backgroundColor, text, effect, progress }) => {
+let Label = ({ color, backgroundColor, text, effect, index, pages, progress }) => {
   let style = { ...textStyle, color };
 
   switch (effect) {
@@ -90,7 +96,11 @@ let Label = ({ color, backgroundColor, text, effect, progress }) => {
 
   return (
     <View style={[viewStyle, { backgroundColor }]}>
-      <Animated.Text style={style}>{text}</Animated.Text>
+      <Animated.Text style={style}>
+        {text}
+        {'\n'}
+        <Animated.Text style={indexStyle}>{`[${index + 1} / ${pages}]`}</Animated.Text>
+      </Animated.Text>
     </View>
   );
 };
