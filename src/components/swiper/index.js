@@ -130,13 +130,16 @@ export default class Swiper extends PureComponent {
 
   renderPage(page, index) {
     let { width, height, progress } = this.state;
+    let { children } = this.props;
+
+    let pages = Children.count(children);
 
     /* Adjust progress by page index */
     progress = Animated.add(progress, -index);
 
     return (
       <View style={{ width, height }}>
-        {React.cloneElement(page, { progress })}
+        {React.cloneElement(page, { index, pages, progress })}
       </View>
     );
   }
