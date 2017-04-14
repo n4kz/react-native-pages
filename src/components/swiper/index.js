@@ -180,7 +180,7 @@ export default class Swiper extends PureComponent {
   }
 
   render() {
-    let { width, height, progress } = this.state;
+    let { progress } = this.state;
     let { horizontal } = this.props;
     let {
       style,
