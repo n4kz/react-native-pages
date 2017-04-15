@@ -128,6 +128,14 @@ export default class Swiper extends PureComponent {
     });
   }
 
+  isDragging() {
+    return 0 === this.scrollState;
+  }
+
+  isDecelerating() {
+    return 1 === this.scrollState;
+  }
+
   renderPage(page, index) {
     let { width, height, progress } = this.state;
     let { children } = this.props;
