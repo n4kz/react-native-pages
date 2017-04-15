@@ -159,30 +159,15 @@ export default class Swiper extends PureComponent {
       return renderPager(pager);
     }
 
-    let {
-      pages,
-      progress,
-      indicatorColor,
-      indicatorOpacity,
-      indicatorPosition,
-    } = pager;
+    let { indicatorPosition } = pager;
 
     if ('none' === indicatorPosition) {
       return null;
     }
 
-    let horizontal = /^(top|bottom)$/
-      .test(indicatorPosition);
-
     return (
       <View style={styles[indicatorPosition]}>
-        <Indicator
-          pages={pages}
-          color={indicatorColor}
-          alpha={indicatorOpacity}
-          progress={progress}
-          horizontal={horizontal}
-        />
+        <Indicator {...pager} />
       </View>
     );
   }

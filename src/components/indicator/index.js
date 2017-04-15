@@ -6,37 +6,56 @@ import styles from './styles.js';
 export default class Indicator extends PureComponent {
   static propTypes = {
     pages: PropTypes.number.isRequired,
-    color: PropTypes.string.isRequired,
-    alpha: PropTypes.number.isRequired,
     progress: PropTypes.instanceOf(Animated.Value).isRequired,
-    horizontal: PropTypes.bool.isRequired,
+    indicatorColor: PropTypes.string.isRequired,
+    indicatorOpacity: PropTypes.number.isRequired,
+    indicatorPosition: PropTypes.oneOf([
+      'top',
+      'right',
+      'bottom',
+      'left',
+    ]).isRequired,
   };
 
   render() {
-    let { pages, color, alpha, progress, horizontal } = this.props;
-    let dots = [];
+    let {
+      pages,
+      progress,
+      indicatorColor: backgroundColor,
+      indicatorOpacity,
+      indicatorPosition,
+    } = this.props;
 
-    for (let i = 0; i < pages; i++) {
-      let mn = i - 1;
-      let mx = i + 1;
-
+    let dots = Array.from(new Array(pages), (page, index) => {
       let opacity = progress
         .interpolate({
-          inputRange: [-1, mn, i, mx, pages],
-          outputRange: [alpha, alpha, 1.0, alpha, alpha],
+          inputRange: [
+            -Infinity,
+            index - 1,
+            index,
+            index + 1,
+            Infinity,
+          ],
+          outputRange: [
+            indicatorOpacity,
+            indicatorOpacity,
+            1.0,
+            indicatorOpacity,
+            indicatorOpacity,
+          ],
         });
 
-      let dotStyle = {
-        opacity,
-        backgroundColor: color,
-      };
+      let style = { opacity, backgroundColor };
 
-      dots.push(
-        <Animated.View style={[styles.dot, dotStyle]} key={i} />
+      return (
+        <Animated.View style={[styles.dot, style]} key={index} />
       );
-    }
+    });
 
-    let flexDirection = horizontal? 'row' : 'column';
+    let flexDirection = /^(top|bottom)$/
+      .test(indicatorPosition)?
+        'row':
+        'column';
 
     return (
       <View style={[styles.container, { flexDirection }]}>
