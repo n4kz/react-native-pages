@@ -2,6 +2,7 @@
 [npm-url]: https://npmjs.com/package/react-native-pages
 [license-badge]: https://img.shields.io/npm/l/react-native-pages.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/license.txt
+[indicator-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/src/components/indicator/index.js
 
 # react-native-pages
 
@@ -67,6 +68,34 @@ name           | description                                       | returns
 scrollToPage   | Scroll to page with optional animation            | -
 isDragging     | Returns whether the user has begun scrolling      | Boolean
 isDecelerating | Returns whether content is moving after scrolling | Boolean
+
+## Customizing indicator
+
+```javascript
+class Example extends Component {
+  renderPager({ pages, progress, indicatorPosition }) {
+    if ('none' === indicatorPosition) {
+      return null;
+    }
+
+    return (
+      <MyIndicator pages={pages} progress={progress} position={indicatorPosition} />
+    );
+  }
+
+  render() {
+    let { children, ...props } = this.props;
+
+    return (
+      <Pages renderPager={this.renderPager.bind(this)}>
+        {children}
+      </Pages>
+    );
+  }
+}
+```
+
+For implementation details take look at [Indicator][indicator-url] component
 
 ## Example
 
