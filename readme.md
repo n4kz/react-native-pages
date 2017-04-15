@@ -2,8 +2,8 @@
 [npm-url]: https://npmjs.com/package/react-native-pages
 [license-badge]: https://img.shields.io/npm/l/react-native-pages.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/license.txt
-[indicator-url]: https://github.com/n4kz/react-native-pages/tree/master/src/components/indicator/index.js
-[example-url]: https://github.com/n4kz/react-native-pages/tree/master/example/app.js
+[indicator-source]: https://github.com/n4kz/react-native-pages/blob/master/src/components/indicator/index.js
+[example-source]: https://github.com/n4kz/react-native-pages/blob/master/example/app.js
 
 # react-native-pages
 
@@ -12,7 +12,7 @@
 
 Easy to use page view component for React Native
 
-![example](https://cloud.githubusercontent.com/assets/2055622/24577964/2eb771f0-16e0-11e7-9694-a0200716dd56.gif)
+![example](https://cloud.githubusercontent.com/assets/2055622/25063699/68d6914e-21f4-11e7-81fe-b72d8e003530.gif)
 
 ## Features
 
@@ -97,7 +97,7 @@ class Example extends Component {
 }
 ```
 
-For implementation details take look at [Indicator][indicator-url] component
+For implementation details take look at [Indicator][indicator-source] component
 
 ## Parallax and other animations
 
@@ -109,7 +109,7 @@ All child components receive the following props
  pages    | Page count                           | Number
  progress | Animated.Value with current progress | Object
 
-For usage example take look at example app [source code][example-url]
+For usage example take look at example app [source code][example-source]
 
 ## Example
 
