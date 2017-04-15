@@ -2,8 +2,8 @@
 [npm-url]: https://npmjs.com/package/react-native-pages
 [license-badge]: https://img.shields.io/npm/l/react-native-pages.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/license.txt
-[indicator-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/src/components/indicator/index.js
-[example-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/example/app.js
+[indicator-url]: https://github.com/n4kz/react-native-pages/tree/master/src/components/indicator/index.js
+[example-url]: https://github.com/n4kz/react-native-pages/tree/master/example/app.js
 
 # react-native-pages
 
@@ -52,24 +52,24 @@ class Example extends Component {
 
 ## Properties
 
-name              | description                            | type     | default
------------------ | -------------------------------------- | --------:| --------------------------
-horizontal        | Scroll direction                       |  Boolean | true
-indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
-indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
-indicatorPosition | Page indicator position                |   String | bottom
-onScrollEnd       | Scroll end callback                    | Function | -
-renderPager       | Render pager callback                  | Function | -
+ name              | description                            | type     | default
+:----------------- |:-------------------------------------- | --------:|:--------------------------
+ horizontal        | Scroll direction                       |  Boolean | true
+ indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
+ indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
+ indicatorPosition | Page indicator position                |   String | bottom
+ onScrollEnd       | Scroll end callback                    | Function | -
+ renderPager       | Render pager callback                  | Function | -
 
-Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`.
+Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`
 
 ## Methods
 
-name           | description                                       | returns
--------------- | ------------------------------------------------- | -------:
-scrollToPage   | Scroll to page with optional animation            | -
-isDragging     | Returns whether the user has begun scrolling      | Boolean
-isDecelerating | Returns whether content is moving after scrolling | Boolean
+ name           | description                                       | returns
+:-------------- |:------------------------------------------------- | -------:
+ scrollToPage   | Scroll to page with optional animation            | -
+ isDragging     | Returns whether the user has begun scrolling      | Boolean
+ isDecelerating | Returns whether content is moving after scrolling | Boolean
 
 ## Replacing page indicator
 
@@ -103,11 +103,11 @@ For implementation details take look at [Indicator][indicator-url] component
 
 All child components receive the following props
 
-name     | description                          | type
--------- | ------------------------------------ | ------:
-index    | Page index                           | Number
-pages    | Page count                           | Number
-progress | Animated.Value with current progress | Object
+ name     | description                          | type
+:-------- |:------------------------------------ | ------:
+ index    | Page index                           | Number
+ pages    | Page count                           | Number
+ progress | Animated.Value with current progress | Object
 
 For usage example take look at example app [source code][example-url]
 
