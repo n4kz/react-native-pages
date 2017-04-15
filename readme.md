@@ -17,9 +17,9 @@ Easy to use page view component for React Native
 * Easy to use
 * Consistent look and feel on iOS and Android
 * Landscape and portrait orientation support
+* Animated page indicator
 * Configurable scroll direction
 * Configurable page indicator position, color and opacity
-* Animated page indicator
 * Pure javascript implementation
 
 ## Installation
@@ -49,14 +49,24 @@ class Example extends Component {
 
 ## Properties
 
-name                 | description                               | type     | default
--------------------- | ----------------------------------------- | --------:| --------------------------
-horizontal           | Scroll direction                          |  Boolean | true
-indicatorColor       | Page indicator color                      |   String | rgb(255, 255, 255)
-indicatorOpacity     | Page indicator opacity (inactive dots)    |   Number | 0.30
-indicatorPosition    | Page indicator position                   |   String | horizontal? bottom : right
-onScrollEnd          | Scroll end callback                       | Function | -
-renderPager          | Render pager callback                     | Function | -
+name              | description                            | type     | default
+----------------- | -------------------------------------- | --------:| --------------------------
+horizontal        | Scroll direction                       |  Boolean | true
+indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
+indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
+indicatorPosition | Page indicator position                |   String | bottom
+onScrollEnd       | Scroll end callback                    | Function | -
+renderPager       | Render pager callback                  | Function | -
+
+Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`.
+
+## Methods
+
+name           | description                                       | returns
+-------------- | ------------------------------------------------- | -------:
+scrollToPage   | Scroll to page with optional animation            | -
+isDragging     | Returns whether the user has begun scrolling      | Boolean
+isDecelerating | Returns whether content is moving after scrolling | Boolean
 
 ## Example
 
