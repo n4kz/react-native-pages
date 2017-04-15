@@ -3,6 +3,7 @@
 [license-badge]: https://img.shields.io/npm/l/react-native-pages.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/license.txt
 [indicator-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/src/components/indicator/index.js
+[example-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/example/app.js
 
 # react-native-pages
 
@@ -18,6 +19,7 @@ Easy to use page view component for React Native
 * Easy to use
 * Consistent look and feel on iOS and Android
 * Landscape and portrait orientation support
+* Parallax and complex animation support
 * Animated page indicator
 * Configurable scroll direction
 * Configurable page indicator position, color and opacity
@@ -69,7 +71,7 @@ scrollToPage   | Scroll to page with optional animation            | -
 isDragging     | Returns whether the user has begun scrolling      | Boolean
 isDecelerating | Returns whether content is moving after scrolling | Boolean
 
-## Customizing indicator
+## Replacing page indicator
 
 ```javascript
 class Example extends Component {
@@ -87,7 +89,7 @@ class Example extends Component {
     let { children, ...props } = this.props;
 
     return (
-      <Pages renderPager={this.renderPager.bind(this)}>
+      <Pages {...props} renderPager={this.renderPager.bind(this)}>
         {children}
       </Pages>
     );
@@ -96,6 +98,18 @@ class Example extends Component {
 ```
 
 For implementation details take look at [Indicator][indicator-url] component
+
+## Parallax and other animations
+
+All child components receive the following props
+
+name     | description                          | type
+-------- | ------------------------------------ | ------:
+index    | Page index                           | Number
+pages    | Page count                           | Number
+progress | Animated.Value with current progress | Object
+
+For usage example take look at example app [source code][example-url]
 
 ## Example
 
