@@ -5,6 +5,8 @@ import styles from './styles.js';
 
 export default class Indicator extends PureComponent {
   static propTypes = {
+    ...View.propTypes,
+
     pages: PropTypes.number.isRequired,
     progress: PropTypes.instanceOf(Animated.Value).isRequired,
     indicatorColor: PropTypes.string.isRequired,
@@ -24,6 +26,8 @@ export default class Indicator extends PureComponent {
       indicatorColor: backgroundColor,
       indicatorOpacity,
       indicatorPosition,
+      style,
+      ...props
     } = this.props;
 
     let dots = Array.from(new Array(pages), (page, index) => {
@@ -58,7 +62,7 @@ export default class Indicator extends PureComponent {
         'column';
 
     return (
-      <View style={[styles.container, { flexDirection }]}>
+      <View style={[styles.container, { flexDirection }, style]} {...props}>
         {dots}
       </View>
     );
