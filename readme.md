@@ -4,6 +4,7 @@
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/license.txt
 [indicator-source]: https://github.com/n4kz/react-native-pages/blob/master/src/components/indicator/index.js
 [example-source]: https://github.com/n4kz/react-native-pages/blob/master/example/app.js
+[example-url]: https://cloud.githubusercontent.com/assets/2055622/25063699/68d6914e-21f4-11e7-81fe-b72d8e003530.gif
 
 # react-native-pages
 
@@ -12,7 +13,7 @@
 
 Easy to use page view component for React Native
 
-![example](https://cloud.githubusercontent.com/assets/2055622/25063699/68d6914e-21f4-11e7-81fe-b72d8e003530.gif)
+![example][example-url]
 
 ## Features
 
