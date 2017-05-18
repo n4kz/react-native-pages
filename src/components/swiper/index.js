@@ -52,6 +52,7 @@ export default class Swiper extends PureComponent {
     this.onScrollBeginDrag = this.onScrollBeginDrag.bind(this);
     this.onScrollEndDrag = this.onScrollEndDrag.bind(this);
 
+    this.updateRef = this.updateRef.bind(this, 'scroll');
     this.renderPage = this.renderPage.bind(this);
 
     this.progress = 0;
@@ -69,6 +70,10 @@ export default class Swiper extends PureComponent {
       /* Fix scroll position after layout update */
       this.scrollToPage(Math.floor(this.progress), false);
     }
+  }
+
+  updateRef(name, ref) {
+    this[name] = ref;
   }
 
   onLayout(event) {
@@ -123,7 +128,7 @@ export default class Swiper extends PureComponent {
     let { horizontal } = this.props;
     let { [horizontal? 'width' : 'height']: base } = this.state;
 
-    this.refs.scroll.scrollTo({
+    this.scroll.scrollTo({
       [horizontal? 'x' : 'y']: page * base,
       animated,
     });
@@ -205,7 +210,7 @@ export default class Swiper extends PureComponent {
           onScroll={this.onScroll}
           onScrollBeginDrag={this.onScrollBeginDrag}
           onScrollEndDrag={this.onScrollEndDrag}
-          ref='scroll'
+          ref={this.updateRef}
         >
           {Children.map(children, this.renderPage)}
         </ScrollView>
