@@ -19,6 +19,7 @@ export default class Swiper extends PureComponent {
     indicatorOpacity: 0.30,
 
     horizontal: true,
+    rtl: false,
   };
 
   static propTypes = {
@@ -35,6 +36,7 @@ export default class Swiper extends PureComponent {
     ]),
 
     horizontal: PropTypes.bool,
+    rtl: PropTypes.bool,
 
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
@@ -146,15 +148,21 @@ export default class Swiper extends PureComponent {
 
   renderPage(page, index) {
     let { width, height, progress } = this.state;
-    let { children } = this.props;
+    let { children, horizontal, rtl } = this.props;
 
     let pages = Children.count(children);
+
+    let style = {
+      width,
+      height,
+      ...((horizontal && rtl)? { transform: [{ rotate: '-180deg' }] } : null),
+    };
 
     /* Adjust progress by page index */
     progress = Animated.add(progress, -index);
 
     return (
-      <View style={{ width, height }}>
+      <View style={style}>
         {React.cloneElement(page, { index, pages, progress })}
       </View>
     );
@@ -182,7 +190,7 @@ export default class Swiper extends PureComponent {
 
   render() {
     let { progress } = this.state;
-    let { horizontal } = this.props;
+    let { horizontal, rtl } = this.props;
     let {
       style,
       children,
@@ -203,11 +211,16 @@ export default class Swiper extends PureComponent {
         indicatorPosition,
       });
 
+    let scrollStyle = {
+      flex: 1,
+      ...((horizontal && rtl)? { transform: [{ rotate: '180deg' }] } : null),
+    };
+
     return (
       <View style={style}>
         <ScrollView
           {...props}
-          style={styles.container}
+          style={scrollStyle}
           onLayout={this.onLayout}
           onScroll={this.onScroll}
           onScrollBeginDrag={this.onScrollBeginDrag}
