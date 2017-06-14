@@ -1,12 +1,12 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated } from 'react-native';
+import { View, Animated, ViewPropTypes } from 'react-native';
 
-import styles from './styles.js';
+import styles from './styles';
 
 export default class Indicator extends PureComponent {
   static propTypes = {
-    ...View.propTypes,
+    style: ViewPropTypes.style,
 
     pages: PropTypes.number.isRequired,
     progress: PropTypes.instanceOf(Animated.Value).isRequired,

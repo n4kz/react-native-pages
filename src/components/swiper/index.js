@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Children } from 'react';
-import { View, ScrollView, Animated, Platform } from 'react-native';
+import { View, ScrollView, Animated, Platform, ViewPropTypes } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -23,7 +23,7 @@ export default class Swiper extends PureComponent {
   };
 
   static propTypes = {
-    style: PropTypes.object,
+    style: ViewPropTypes.style,
 
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
