@@ -5,7 +5,7 @@ import { View, ScrollView, Animated, Platform, ViewPropTypes } from 'react-nativ
 import Indicator from '../indicator';
 import styles from './styles';
 
-export default class Swiper extends PureComponent {
+export default class Pages extends PureComponent {
   static defaultProps = {
     pagingEnabled: true,
     showsHorizontalScrollIndicator: false,
