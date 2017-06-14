@@ -13,8 +13,6 @@ export default class Pages extends PureComponent {
     scrollEventThrottle: 30,
     scrollsToTop: false,
 
-    style: styles.container,
-
     indicatorColor: 'rgb(255, 255, 255)',
     indicatorOpacity: 0.30,
 
@@ -24,6 +22,7 @@ export default class Pages extends PureComponent {
 
   static propTypes = {
     style: ViewPropTypes.style,
+    containerStyle: ViewPropTypes.style,
 
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
@@ -152,16 +151,15 @@ export default class Pages extends PureComponent {
 
     let pages = Children.count(children);
 
-    let style = [
-      { width, height },
-      (horizontal && rtl)? styles.rtl : null,
-    ];
+    let pageStyle = (horizontal && rtl)?
+      styles.rtl:
+      null;
 
     /* Adjust progress by page index */
     progress = Animated.add(progress, -index);
 
     return (
-      <View style={style}>
+      <View style={[{ width, height }, pageStyle]}>
         {React.cloneElement(page, { index, pages, progress })}
       </View>
     );
@@ -180,13 +178,12 @@ export default class Pages extends PureComponent {
       return null;
     }
 
-    let style = [
-      styles[indicatorPosition],
-      (horizontal && rtl)? styles.rtl : null,
-    ];
+    let indicatorStyle = (horizontal && rtl)?
+      styles.rtl:
+      null;
 
     return (
-      <View style={style}>
+      <View style={[styles[indicatorPosition], indicatorStyle]}>
         <Indicator {...pager} />
       </View>
     );
@@ -197,6 +194,7 @@ export default class Pages extends PureComponent {
     let { horizontal, rtl } = this.props;
     let {
       style,
+      containerStyle,
       children,
       indicatorColor,
       indicatorOpacity,
@@ -215,16 +213,15 @@ export default class Pages extends PureComponent {
         indicatorPosition,
       });
 
-    let scrollStyle = [
-      styles.container,
-      (horizontal && rtl)? styles.rtl : null,
-    ];
+    let scrollStyle = (horizontal && rtl)?
+      styles.rtl:
+      null;
 
     return (
-      <View style={style}>
+      <View style={[styles.container, containerStyle]}>
         <ScrollView
           {...props}
-          style={scrollStyle}
+          style={[styles.container, style, scrollStyle]}
           onLayout={this.onLayout}
           onScroll={this.onScroll}
           onScrollBeginDrag={this.onScrollBeginDrag}
