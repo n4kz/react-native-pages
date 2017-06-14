@@ -24,6 +24,7 @@ Easy to use page view component for React Native
 * Animated page indicator
 * Configurable scroll direction
 * Configurable page indicator position, color and opacity
+* RTL support
 * Pure javascript implementation
 
 ## Installation
@@ -54,11 +55,13 @@ class Example extends Component {
 ## Properties
 
  name              | description                            | type     | default
-:----------------- |:-------------------------------------- | --------:|:--------------------------
+:----------------- |:-------------------------------------- | --------:|:------------------
  horizontal        | Scroll direction                       |  Boolean | true
+ rtl               | RTL mode for horizontal scroll         |  Boolean | false
  indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
  indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
  indicatorPosition | Page indicator position                |   String | bottom
+ containerStyle    | Style for container view               |   Object | -
  onScrollEnd       | Scroll end callback                    | Function | -
  renderPager       | Render pager callback                  | Function | -
 
