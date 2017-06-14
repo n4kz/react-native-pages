@@ -1,6 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
+  rtl: {
+    transform: [{
+      rotate: '180deg',
+    }],
+  },
+
   container: {
     flex: 1,
   },

@@ -152,11 +152,10 @@ export default class Swiper extends PureComponent {
 
     let pages = Children.count(children);
 
-    let style = {
-      width,
-      height,
-      ...((horizontal && rtl)? { transform: [{ rotate: '-180deg' }] } : null),
-    };
+    let style = [
+      { width, height },
+      (horizontal && rtl)? styles.rtl : null,
+    ];
 
     /* Adjust progress by page index */
     progress = Animated.add(progress, -index);
@@ -169,10 +168,10 @@ export default class Swiper extends PureComponent {
   }
 
   renderPager(pager) {
-    let { renderPager } = this.props;
+    let { renderPager, horizontal, rtl } = this.props;
 
     if ('function' === typeof renderPager) {
-      return renderPager(pager);
+      return renderPager({ horizontal, rtl, ...pager });
     }
 
     let { indicatorPosition } = pager;
@@ -181,8 +180,13 @@ export default class Swiper extends PureComponent {
       return null;
     }
 
+    let style = [
+      styles[indicatorPosition],
+      (horizontal && rtl)? styles.rtl : null,
+    ];
+
     return (
-      <View style={styles[indicatorPosition]}>
+      <View style={style}>
         <Indicator {...pager} />
       </View>
     );
@@ -211,10 +215,10 @@ export default class Swiper extends PureComponent {
         indicatorPosition,
       });
 
-    let scrollStyle = {
-      flex: 1,
-      ...((horizontal && rtl)? { transform: [{ rotate: '180deg' }] } : null),
-    };
+    let scrollStyle = [
+      styles.container,
+      (horizontal && rtl)? styles.rtl : null,
+    ];
 
     return (
       <View style={style}>
