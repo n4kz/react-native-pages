@@ -7,7 +7,6 @@ import styles from './styles';
 
 export default class Swiper extends PureComponent {
   static defaultProps = {
-    horizontal: true,
     pagingEnabled: true,
     showsHorizontalScrollIndicator: false,
     showsVerticalScrollIndicator: false,
@@ -18,12 +17,12 @@ export default class Swiper extends PureComponent {
 
     indicatorColor: 'rgb(255, 255, 255)',
     indicatorOpacity: 0.30,
+
+    horizontal: true,
   };
 
   static propTypes = {
-    ...ScrollView.propTypes,
-
-    style: View.propTypes.style,
+    style: PropTypes.object,
 
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
@@ -35,11 +34,14 @@ export default class Swiper extends PureComponent {
       'left',
     ]),
 
+    horizontal: PropTypes.bool,
+
     children: PropTypes.oneOfType([
       PropTypes.arrayOf(PropTypes.node),
       PropTypes.node,
     ]),
 
+    onLayout: PropTypes.func,
     onScrollEnd: PropTypes.func,
     renderPager: PropTypes.func,
   };
