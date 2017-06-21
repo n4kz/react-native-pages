@@ -28,6 +28,7 @@ export default class Indicator extends PureComponent {
       indicatorOpacity,
       indicatorPosition,
       style,
+      indicatorCustomStyle,
       ...props
     } = this.props;
 
@@ -53,14 +54,14 @@ export default class Indicator extends PureComponent {
       let style = { opacity, backgroundColor };
 
       return (
-        <Animated.View style={[styles.dot, style]} key={index} />
+        <Animated.View style={[indicatorCustomStyle, styles.dot, style]} key={index} />
       );
     });
 
     let flexDirection = /^(top|bottom)$/
-      .test(indicatorPosition)?
-        'row':
-        'column';
+      .test(indicatorPosition) ?
+      'row' :
+      'column';
 
     return (
       <View style={[styles.container, { flexDirection }, style]} {...props}>
