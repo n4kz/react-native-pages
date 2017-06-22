@@ -58,6 +58,7 @@ class Example extends Component {
 :----------------- |:-------------------------------------- | --------:|:------------------
  horizontal        | Scroll direction                       |  Boolean | true
  rtl               | RTL mode for horizontal scroll         |  Boolean | false
+ startPage         | Start page                             |   Number | 0
  indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
  indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
  indicatorPosition | Page indicator position                |   String | bottom
