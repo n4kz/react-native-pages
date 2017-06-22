@@ -16,6 +16,8 @@ export default class Pages extends PureComponent {
     indicatorColor: 'rgb(255, 255, 255)',
     indicatorOpacity: 0.30,
 
+    startPage: 0,
+
     horizontal: true,
     rtl: false,
   };
@@ -33,6 +35,8 @@ export default class Pages extends PureComponent {
       'bottom',
       'left',
     ]),
+
+    startPage: PropTypes.number,
 
     horizontal: PropTypes.bool,
     rtl: PropTypes.bool,
@@ -58,20 +62,24 @@ export default class Pages extends PureComponent {
     this.updateRef = this.updateRef.bind(this, 'scroll');
     this.renderPage = this.renderPage.bind(this);
 
-    this.progress = 0;
+    let { startPage } = this.props;
+
+    this.progress = startPage;
     this.scrollState = -1;
 
     this.state = {
       width: 0,
       height: 0,
-      progress: new Animated.Value(0),
+      progress: new Animated.Value(this.progress),
     };
   }
 
   componentDidUpdate() {
     if (-1 === this.scrollState) {
       /* Fix scroll position after layout update */
-      this.scrollToPage(Math.floor(this.progress), false);
+      requestAnimationFrame(() => {
+        this.scrollToPage(Math.floor(this.progress), false);
+      });
     }
   }
 
