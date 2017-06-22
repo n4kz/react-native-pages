@@ -25,7 +25,7 @@ export default class Pages extends PureComponent {
   static propTypes = {
     style: ViewPropTypes.style,
     containerStyle: ViewPropTypes.style,
-
+    indicatorCustomStyle: ViewPropTypes.style,
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
     indicatorPosition: PropTypes.oneOf([
@@ -100,10 +100,10 @@ export default class Pages extends PureComponent {
 
   onScroll(event) {
     let { horizontal } = this.props;
-    let { [horizontal? 'x' : 'y']: offset } = event.nativeEvent.contentOffset;
-    let { [horizontal? 'width' : 'height']: base, progress } = this.state;
+    let { [horizontal ? 'x' : 'y']: offset } = event.nativeEvent.contentOffset;
+    let { [horizontal ? 'width' : 'height']: base, progress } = this.state;
 
-    progress.setValue(this.progress = base? offset / base : 0);
+    progress.setValue(this.progress = base ? offset / base : 0);
 
     if (1 === this.scrollState && !(offset % base)) {
       this.onScrollEnd(progress);
@@ -137,10 +137,10 @@ export default class Pages extends PureComponent {
 
   scrollToPage(page, animated = true) {
     let { horizontal } = this.props;
-    let { [horizontal? 'width' : 'height']: base } = this.state;
+    let { [horizontal ? 'width' : 'height']: base } = this.state;
 
     this.scroll.scrollTo({
-      [horizontal? 'x' : 'y']: page * base,
+      [horizontal ? 'x' : 'y']: page * base,
       animated,
     });
   }
@@ -159,8 +159,8 @@ export default class Pages extends PureComponent {
 
     let pages = Children.count(children);
 
-    let pageStyle = (horizontal && rtl)?
-      styles.rtl:
+    let pageStyle = (horizontal && rtl) ?
+      styles.rtl :
       null;
 
     /* Adjust progress by page index */
@@ -186,8 +186,8 @@ export default class Pages extends PureComponent {
       return null;
     }
 
-    let indicatorStyle = (horizontal && rtl)?
-      styles.rtl:
+    let indicatorStyle = (horizontal && rtl) ?
+      styles.rtl :
       null;
 
     return (
@@ -205,8 +205,9 @@ export default class Pages extends PureComponent {
       containerStyle,
       children,
       indicatorColor,
+      indicatorCustomStyle,
       indicatorOpacity,
-      indicatorPosition = horizontal? 'bottom' : 'right',
+      indicatorPosition = horizontal ? 'bottom' : 'right',
       ...props
     } = this.props;
 
@@ -219,10 +220,11 @@ export default class Pages extends PureComponent {
         indicatorColor,
         indicatorOpacity,
         indicatorPosition,
+        indicatorCustomStyle
       });
 
-    let scrollStyle = (horizontal && rtl)?
-      styles.rtl:
+    let scrollStyle = (horizontal && rtl) ?
+      styles.rtl :
       null;
 
     return (
