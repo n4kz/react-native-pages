@@ -99,6 +99,10 @@ export default class Pages extends PureComponent {
   }
 
   onScroll(event) {
+    if (-1 === this.scrollState) {
+      return;
+    }
+
     let { horizontal } = this.props;
     let { [horizontal? 'x' : 'y']: offset } = event.nativeEvent.contentOffset;
     let { [horizontal? 'width' : 'height']: base, progress } = this.state;
