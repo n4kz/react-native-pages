@@ -1,35 +1,35 @@
 {
-	"name": "react-native-pages",
-	"version": "0.5.1",
-	"license": "BSD-3-Clause",
-	"author": "Alexander Nazarov <n4kz@n4kz.com>",
+  "name": "react-native-pages",
+  "version": "0.5.1",
+  "license": "BSD-3-Clause",
+  "author": "Alexander Nazarov <n4kz@n4kz.com>",
 
-	"description": "Easy to use page view component",
-	"keywords": ["react", "react-component", "react-native", "ios", "android", "pageview", "viewpager", "pager", "swiper"],
+  "description": "Easy to use page view component",
+  "keywords": ["react", "react-component", "react-native", "ios", "android", "pageview", "viewpager", "pager", "swiper"],
 
-	"main": "index.js",
+  "main": "index.js",
 
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/n4kz/react-native-pages.git"
-	},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/n4kz/react-native-pages.git"
+  },
 
-	"peerDependencies": {
-		"react": "*",
-		"react-native": "*"
-	},
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
 
-	"devDependencies": {
-		"babel-eslint": "^7.2.0",
-		"eslint": "^3.18.0",
-		"eslint-plugin-react": "^7.0.0"
-	},
+  "devDependencies": {
+    "babel-eslint": "^7.2.0",
+    "eslint": "^3.18.0",
+    "eslint-plugin-react": "^7.0.0"
+  },
 
   "dependencies": {
     "prop-types": "^15.5.9"
   },
 
-	"scripts": {
-		"lint": "eslint src example/app.js"
-	}
+  "scripts": {
+    "lint": "eslint src example/app.js"
+  }
 }
