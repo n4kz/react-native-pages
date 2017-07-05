@@ -143,6 +143,10 @@ export default class Pages extends PureComponent {
     let { horizontal } = this.props;
     let { [horizontal? 'width' : 'height']: base } = this.state;
 
+    if (animated) {
+      this.scrollState = 1;
+    }
+
     this.scroll.scrollTo({
       [horizontal? 'x' : 'y']: page * base,
       animated,
