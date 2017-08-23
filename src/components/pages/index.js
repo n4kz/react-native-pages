@@ -110,7 +110,7 @@ export default class Pages extends PureComponent {
     progress.setValue(this.progress = base? offset / base : 0);
 
     if (1 === this.scrollState && !(offset % base)) {
-      this.onScrollEnd(progress);
+      this.onScrollEnd();
 
       this.scrollState = -1;
     }
@@ -131,11 +131,11 @@ export default class Pages extends PureComponent {
     this.scrollState = 1;
   }
 
-  onScrollEnd(page) {
+  onScrollEnd() {
     let { onScrollEnd } = this.props;
 
     if ('function' === typeof onScrollEnd) {
-      onScrollEnd(page);
+      onScrollEnd(Math.round(this.progress));
     }
   }
 
