@@ -64,6 +64,7 @@ export default class Pages extends PureComponent {
 
     let { startPage } = this.props;
 
+    this.mounted = false;
     this.progress = startPage;
     this.scrollState = -1;
 
@@ -74,6 +75,10 @@ export default class Pages extends PureComponent {
     };
   }
 
+  componentDidMount() {
+    this.mounted = true;
+  }
+
   componentDidUpdate() {
     if (-1 === this.scrollState) {
       /* Fix scroll position after layout update */
@@ -81,6 +86,10 @@ export default class Pages extends PureComponent {
         this.scrollToPage(Math.floor(this.progress), false);
       });
     }
+  }
+
+  componentWillUnmount() {
+    this.mounted = false;
   }
 
   updateRef(name, ref) {
@@ -147,10 +156,12 @@ export default class Pages extends PureComponent {
       this.scrollState = 1;
     }
 
-    this.scroll && this.scroll.scrollTo({
-      [horizontal? 'x' : 'y']: page * base,
-      animated,
-    });
+    if (this.mounted && this.scroll) {
+      this.scroll.scrollTo({
+        [horizontal? 'x' : 'y']: page * base,
+        animated,
+      });
+    }
   }
 
   isDragging() {
