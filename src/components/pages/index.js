@@ -5,6 +5,12 @@ import { View, ScrollView, Animated, Platform, ViewPropTypes } from 'react-nativ
 import Indicator from '../indicator';
 import styles from './styles';
 
+const floatEpsilon = Math.pow(2, -23);
+
+function equal(a, b) {
+  return Math.abs(a - b) <= floatEpsilon * Math.max(Math.abs(a), Math.abs(b));
+}
+
 export default class Pages extends PureComponent {
   static defaultProps = {
     pagingEnabled: true,
@@ -118,7 +124,9 @@ export default class Pages extends PureComponent {
 
     progress.setValue(this.progress = base? offset / base : 0);
 
-    if (1 === this.scrollState && !(offset % base)) {
+    let discreteProgress = Math.round(this.progress);
+
+    if (1 === this.scrollState && equal(discreteProgress, this.progress)) {
       this.onScrollEnd();
 
       this.scrollState = -1;
