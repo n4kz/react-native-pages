@@ -63,6 +63,7 @@ class Example extends Component {
  indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
  indicatorPosition | Page indicator position                |   String | bottom
  containerStyle    | Style for container view               |   Object | -
+ progress          | Animated.Value updated with progress   |   Object | -
  onScrollEnd       | Scroll end callback                    | Function | -
  renderPager       | Render pager callback                  | Function | -
 
