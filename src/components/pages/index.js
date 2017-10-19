@@ -43,6 +43,7 @@ export default class Pages extends PureComponent {
     ]),
 
     startPage: PropTypes.number,
+    progress: PropTypes.instanceOf(Animated.Value),
 
     horizontal: PropTypes.bool,
     rtl: PropTypes.bool,
@@ -68,16 +69,17 @@ export default class Pages extends PureComponent {
     this.updateRef = this.updateRef.bind(this, 'scroll');
     this.renderPage = this.renderPage.bind(this);
 
-    let { startPage } = this.props;
+    let { startPage, progress = new Animated.Value(0) } = this.props;
 
     this.mounted = false;
-    this.progress = startPage;
     this.scrollState = -1;
+
+    progress.setValue(this.progress = startPage);
 
     this.state = {
       width: 0,
       height: 0,
-      progress: new Animated.Value(this.progress),
+      progress,
     };
   }
 
@@ -96,6 +98,16 @@ export default class Pages extends PureComponent {
 
   componentWillUnmount() {
     this.mounted = false;
+  }
+
+  componentWillReceiveProps(props) {
+    let { progress } = props;
+
+    if (progress !== this.props.progress) {
+      progress.setValue(this.progress);
+
+      this.setState({ progress });
+    }
   }
 
   updateRef(name, ref) {
