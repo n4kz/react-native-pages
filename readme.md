@@ -54,18 +54,19 @@ class Example extends Component {
 
 ## Properties
 
- name              | description                            | type     | default
-:----------------- |:-------------------------------------- | --------:|:------------------
- horizontal        | Scroll direction                       |  Boolean | true
- rtl               | RTL mode for horizontal scroll         |  Boolean | false
- startPage         | Start page                             |   Number | 0
- indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
- indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
- indicatorPosition | Page indicator position                |   String | bottom
- containerStyle    | Style for container view               |   Object | -
- progress          | Animated.Value updated with progress   |   Object | -
- onScrollEnd       | Scroll end callback                    | Function | -
- renderPager       | Render pager callback                  | Function | -
+ name                   | description                            | type     | default
+:-----------------------|:-------------------------------------- | --------:|:------------------
+ horizontal             | Scroll direction                       |  Boolean | true
+ rtl                    | RTL mode for horizontal scroll         |  Boolean | false
+ startPage              | Start page                             |   Number | 0
+ indicatorColor         | Page indicator color                   |   String | rgb(255, 255, 255)
+ indicatorOpacity       | Page indicator opacity (inactive dots) |   Number | 0.30
+ indicatorPosition      | Page indicator position                |   String | bottom
+ indicatorContainerStyle| Indicator container style              |   Object |
+ containerStyle         | Style for container view               |   Object | -
+ progress               | Animated.Value updated with progress   |   Object | -
+ onScrollEnd            | Scroll end callback                    | Function | -
+ renderPager            | Render pager callback                  | Function | -
 
 Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`
 
