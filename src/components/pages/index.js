@@ -69,12 +69,11 @@ export default class Pages extends PureComponent {
     this.updateRef = this.updateRef.bind(this, 'scroll');
     this.renderPage = this.renderPage.bind(this);
 
-    let { startPage, progress = new Animated.Value(0) } = this.props;
+    let { startPage, progress = new Animated.Value(startPage) } = this.props;
 
+    this.progress = startPage;
     this.mounted = false;
     this.scrollState = -1;
-
-    progress.setValue(this.progress = startPage);
 
     this.state = {
       width: 0,
