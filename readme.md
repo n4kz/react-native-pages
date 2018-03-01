@@ -3,6 +3,8 @@
 [license-badge]: https://img.shields.io/npm/l/react-native-pages.svg?colorB=448aff
 [license-url]: https://raw.githubusercontent.com/n4kz/react-native-pages/master/license.txt
 [indicator-source]: https://github.com/n4kz/react-native-pages/blob/master/src/components/indicator/index.js
+[codeclimate-badge]: https://img.shields.io/codeclimate/maintainability/n4kz/react-native-pages.svg
+[codeclimate-url]: https://codeclimate.com/github/n4kz/react-native-pages
 [example-source]: https://github.com/n4kz/react-native-pages/blob/master/example/app.js
 [example-url]: https://cloud.githubusercontent.com/assets/2055622/25063699/68d6914e-21f4-11e7-81fe-b72d8e003530.gif
 
@@ -10,6 +12,7 @@
 
 [![npm][npm-badge]][npm-url]
 [![license][license-badge]][license-url]
+[![codeclimate][codeclimate-badge]][codeclimate-url]
 
 Easy to use page view component for React Native
 
@@ -130,4 +133,4 @@ npm run ios # or npm run android
 
 BSD License
 
-Copyright 2017 Alexander Nazarov. All rights reserved.
+Copyright 2017-2018 Alexander Nazarov. All rights reserved.
