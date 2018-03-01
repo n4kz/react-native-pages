@@ -238,7 +238,7 @@ export default class Pages extends PureComponent {
 
   renderPages(props) {
     let { horizontal, rtl, style, children } = this.props;
-    let { layout } = this.state;
+    let { [horizontal? 'width' : 'height']: base, layout } = this.state;
 
     if (!layout) {
       return null;
@@ -248,6 +248,11 @@ export default class Pages extends PureComponent {
       styles.rtl:
       null;
 
+    let contentOffset = {
+      [horizontal? 'x' : 'y']: base * Math.floor(this.progress),
+      [horizontal? 'y' : 'x']: 0,
+    };
+
     return (
       <ScrollView
         {...props}
@@ -255,6 +260,7 @@ export default class Pages extends PureComponent {
         onScroll={this.onScroll}
         onScrollBeginDrag={this.onScrollBeginDrag}
         onScrollEndDrag={this.onScrollEndDrag}
+        contentOffset={contentOffset}
         ref={this.updateRef}
       >
         {Children.map(children, this.renderPage)}
