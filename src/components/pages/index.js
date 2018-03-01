@@ -76,6 +76,7 @@ export default class Pages extends PureComponent {
     this.scrollState = -1;
 
     this.state = {
+      layout: false,
       width: 0,
       height: 0,
       progress,
@@ -121,7 +122,7 @@ export default class Pages extends PureComponent {
       onLayout(event);
     }
 
-    this.setState({ width, height });
+    this.setState({ width, height, layout: true });
   }
 
   onScroll(event) {
@@ -235,9 +236,35 @@ export default class Pages extends PureComponent {
     );
   }
 
+  renderPages(props) {
+    let { horizontal, rtl, style, children } = this.props;
+    let { layout } = this.state;
+
+    if (!layout) {
+      return null;
+    }
+
+    let scrollStyle = (horizontal && rtl)?
+      styles.rtl:
+      null;
+
+    return (
+      <ScrollView
+        {...props}
+        style={[styles.container, style, scrollStyle]}
+        onScroll={this.onScroll}
+        onScrollBeginDrag={this.onScrollBeginDrag}
+        onScrollEndDrag={this.onScrollEndDrag}
+        ref={this.updateRef}
+      >
+        {Children.map(children, this.renderPage)}
+      </ScrollView>
+    );
+  }
+
   render() {
     let { progress } = this.state;
-    let { horizontal, rtl } = this.props;
+    let { horizontal } = this.props;
     let {
       style,
       containerStyle,
@@ -259,23 +286,9 @@ export default class Pages extends PureComponent {
         indicatorPosition,
       });
 
-    let scrollStyle = (horizontal && rtl)?
-      styles.rtl:
-      null;
-
     return (
-      <View style={[styles.container, containerStyle]}>
-        <ScrollView
-          {...props}
-          style={[styles.container, style, scrollStyle]}
-          onLayout={this.onLayout}
-          onScroll={this.onScroll}
-          onScrollBeginDrag={this.onScrollBeginDrag}
-          onScrollEndDrag={this.onScrollEndDrag}
-          ref={this.updateRef}
-        >
-          {Children.map(children, this.renderPage)}
-        </ScrollView>
+      <View style={[styles.container, containerStyle]} onLayout={this.onLayout}>
+        {this.renderPages(props)}
 
         <Pager />
       </View>
