@@ -32,6 +32,7 @@ export default class Pages extends PureComponent {
     style: ViewPropTypes.style,
     containerStyle: ViewPropTypes.style,
 
+    indicatorContainerStyle: ViewPropTypes.style,
     indicatorColor: PropTypes.string,
     indicatorOpacity: PropTypes.number,
     indicatorPosition: PropTypes.oneOf([
@@ -213,7 +214,7 @@ export default class Pages extends PureComponent {
   }
 
   renderPager(pager) {
-    let { renderPager, horizontal, rtl } = this.props;
+    let { renderPager, horizontal, rtl, indicatorContainerStyle } = this.props;
 
     if ('function' === typeof renderPager) {
       return renderPager({ horizontal, rtl, ...pager });
@@ -230,7 +231,7 @@ export default class Pages extends PureComponent {
       null;
 
     return (
-      <View style={[styles[indicatorPosition], indicatorStyle]}>
+      <View style={[styles[indicatorPosition], indicatorStyle, indicatorContainerStyle]}>
         <Indicator {...pager} />
       </View>
     );
