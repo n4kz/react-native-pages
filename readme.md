@@ -69,6 +69,7 @@ class Example extends Component {
  progress          | Animated.Value updated with progress   |   Object | -
  onScrollEnd       | Scroll end callback                    | Function | -
  renderPager       | Render pager callback                  | Function | -
+ onHalfway         | Dominant page change callback          | Function | -
 
 Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`
 
