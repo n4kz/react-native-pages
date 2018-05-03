@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Children } from 'react';
-import { View, ScrollView, Animated, Platform, ViewPropTypes } from 'react-native';
+import { View, FlatList, Animated, Platform, ViewPropTypes } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -192,7 +192,7 @@ export default class Pages extends PureComponent {
     return 1 === this.scrollState;
   }
 
-  renderPage(page, index) {
+  renderPage({item, index}) {
     let { width, height, progress } = this.state;
     let { children, horizontal, rtl } = this.props;
 
@@ -207,7 +207,7 @@ export default class Pages extends PureComponent {
 
     return (
       <View style={[{ width, height }, pageStyle]}>
-        {React.cloneElement(page, { index, pages, progress })}
+        {React.cloneElement(item, { index, pages, progress })}
       </View>
     );
   }
@@ -254,17 +254,17 @@ export default class Pages extends PureComponent {
     };
 
     return (
-      <ScrollView
+      <FlatList
         {...props}
+        data={Children.toArray(children)}
+        renderItem={(item) => this.renderPage(item)}
         style={[styles.container, style, scrollStyle]}
         onScroll={this.onScroll}
         onScrollBeginDrag={this.onScrollBeginDrag}
         onScrollEndDrag={this.onScrollEndDrag}
         contentOffset={contentOffset}
         ref={this.updateRef}
-      >
-        {Children.map(children, this.renderPage)}
-      </ScrollView>
+      />
     );
   }
 
