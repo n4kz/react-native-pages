@@ -54,6 +54,7 @@ export default class Pages extends PureComponent {
     ]),
 
     onLayout: PropTypes.func,
+    onScroll: PropTypes.func,
     onScrollEnd: PropTypes.func,
     renderPager: PropTypes.func,
   };
@@ -142,6 +143,11 @@ export default class Pages extends PureComponent {
       this.onScrollEnd();
 
       this.scrollState = -1;
+    }
+
+    let { onScroll } = this.props;
+    if ('function' === typeof onScroll) {
+      onScroll(this.progress);
     }
   }
 
