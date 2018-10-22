@@ -237,7 +237,7 @@ export default class Pages extends PureComponent {
   }
 
   renderPages(props) {
-    let { horizontal, rtl, style, children } = this.props;
+    let { horizontal, rtl, style, children, pagingEnabled } = this.props;
     let { [horizontal? 'width' : 'height']: base, layout } = this.state;
 
     if (!layout) {
@@ -256,6 +256,7 @@ export default class Pages extends PureComponent {
     return (
       <ScrollView
         {...props}
+        scrollEnabled={pagingEnabled}
         style={[styles.container, style, scrollStyle]}
         onScroll={this.onScroll}
         onScrollBeginDrag={this.onScrollBeginDrag}
