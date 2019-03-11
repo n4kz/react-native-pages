@@ -194,11 +194,11 @@ export default class Pages extends PureComponent {
 
   renderPage(page, index) {
     let { width, height, progress } = this.state;
-    let { children, horizontal, rtl } = this.props;
+    let { children, pageStyle, horizontal, rtl } = this.props;
 
     let pages = Children.count(children);
 
-    let pageStyle = (horizontal && rtl)?
+    let horizontalRtlStyle = (horizontal && rtl)?
       styles.rtl:
       null;
 
@@ -206,7 +206,7 @@ export default class Pages extends PureComponent {
     progress = Animated.add(progress, -index);
 
     return (
-      <View style={[{ width, height }, pageStyle]}>
+      <View style={[{ width, height }, horizontalRtlStyle, pageStyle]}>
         {React.cloneElement(page, { index, pages, progress })}
       </View>
     );
