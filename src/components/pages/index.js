@@ -40,6 +40,10 @@ export default class Pages extends PureComponent {
       'right',
       'bottom',
       'left',
+      'bottomLeft',
+      'bottomRight',
+      'topLeft',
+      'topRight',
     ]),
 
     startPage: PropTypes.number,
