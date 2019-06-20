@@ -17,6 +17,10 @@ export default class Indicator extends PureComponent {
       'right',
       'bottom',
       'left',
+      'topRight',
+      'topLeft',
+      'bottomRight',
+      'bottomLeft',
     ]).isRequired,
   };
 
