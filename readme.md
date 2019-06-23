@@ -65,12 +65,13 @@ class Example extends Component {
  indicatorColor    | Page indicator color                   |   String | rgb(255, 255, 255)
  indicatorOpacity  | Page indicator opacity (inactive dots) |   Number | 0.30
  indicatorPosition | Page indicator position                |   String | bottom
+ paged             | Page Scroll Type .                     |   Boolean| true
  containerStyle    | Style for container view               |   Object | -
  progress          | Animated.Value updated with progress   |   Object | -
  onScrollEnd       | Scroll end callback                    | Function | -
  renderPager       | Render pager callback                  | Function | -
 
-Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`
+Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom`, `left`, `bottomLeft`, `bottomRight`, `topLeft` and `topRight`;
 
 ## Methods
 

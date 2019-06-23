@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   rtl: {
@@ -38,4 +38,25 @@ export default StyleSheet.create({
     right: 0,
     bottom: 0,
   },
+  topLeft: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+  },
+  bottomLeft: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+  },
+  topRight: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+  },
+  bottomRight: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+  },
+
 });

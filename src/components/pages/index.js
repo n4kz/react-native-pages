@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { PureComponent, Children } from 'react';
-import { View, ScrollView, Animated, Platform, ViewPropTypes } from 'react-native';
+import React, {PureComponent, Children} from 'react';
+import {View, ScrollView, Animated, Platform, ViewPropTypes} from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -26,6 +26,7 @@ export default class Pages extends PureComponent {
 
     horizontal: true,
     rtl: false,
+    paged: true
   };
 
   static propTypes = {
@@ -40,6 +41,10 @@ export default class Pages extends PureComponent {
       'right',
       'bottom',
       'left',
+      'bottomLeft',
+      'bottomRight',
+      'topLeft',
+      'topRight',
     ]),
 
     startPage: PropTypes.number,
@@ -56,6 +61,7 @@ export default class Pages extends PureComponent {
     onLayout: PropTypes.func,
     onScrollEnd: PropTypes.func,
     renderPager: PropTypes.func,
+    paged: PropTypes.bool
   };
 
   constructor(props) {
@@ -69,7 +75,7 @@ export default class Pages extends PureComponent {
     this.updateRef = this.updateRef.bind(this, 'scroll');
     this.renderPage = this.renderPage.bind(this);
 
-    let { startPage, progress = new Animated.Value(startPage) } = this.props;
+    let {startPage, progress = new Animated.Value(startPage)} = this.props;
 
     this.progress = startPage;
     this.mounted = false;
@@ -101,12 +107,12 @@ export default class Pages extends PureComponent {
   }
 
   componentWillReceiveProps(props) {
-    let { progress } = props;
+    let {progress} = props;
 
     if (progress !== this.props.progress) {
       progress.setValue(this.progress);
 
-      this.setState({ progress });
+      this.setState({progress});
     }
   }
 
@@ -115,14 +121,14 @@ export default class Pages extends PureComponent {
   }
 
   onLayout(event) {
-    let { width, height } = event.nativeEvent.layout;
-    let { onLayout } = this.props;
+    let {width, height} = event.nativeEvent.layout;
+    let {onLayout} = this.props;
 
     if ('function' === typeof onLayout) {
       onLayout(event);
     }
 
-    this.setState({ width, height, layout: true });
+    this.setState({width, height, layout: true});
   }
 
   onScroll(event) {
@@ -130,11 +136,11 @@ export default class Pages extends PureComponent {
       return;
     }
 
-    let { horizontal } = this.props;
-    let { [horizontal? 'x' : 'y']: offset } = event.nativeEvent.contentOffset;
-    let { [horizontal? 'width' : 'height']: base, progress } = this.state;
+    let {horizontal} = this.props;
+    let {[horizontal ? 'x' : 'y']: offset} = event.nativeEvent.contentOffset;
+    let {[horizontal ? 'width' : 'height']: base, progress} = this.state;
 
-    progress.setValue(this.progress = base? offset / base : 0);
+    progress.setValue(this.progress = base ? offset / base : 0);
 
     let discreteProgress = Math.round(this.progress);
 
@@ -150,10 +156,10 @@ export default class Pages extends PureComponent {
   }
 
   onScrollEndDrag() {
-    let { horizontal } = this.props;
+    let {horizontal, paged} = this.props;
 
     /* Vertical pagination is not working on android, scroll by hands */
-    if ('android' === Platform.OS && !horizontal) {
+    if ('android' === Platform.OS && !horizontal & paged) {
       this.scrollToPage(Math.round(this.progress));
     }
 
@@ -161,7 +167,7 @@ export default class Pages extends PureComponent {
   }
 
   onScrollEnd() {
-    let { onScrollEnd } = this.props;
+    let {onScrollEnd} = this.props;
 
     if ('function' === typeof onScrollEnd) {
       onScrollEnd(Math.round(this.progress));
@@ -169,8 +175,8 @@ export default class Pages extends PureComponent {
   }
 
   scrollToPage(page, animated = true) {
-    let { horizontal } = this.props;
-    let { [horizontal? 'width' : 'height']: base } = this.state;
+    let {horizontal} = this.props;
+    let {[horizontal ? 'width' : 'height']: base} = this.state;
 
     if (animated) {
       this.scrollState = 1;
@@ -178,7 +184,7 @@ export default class Pages extends PureComponent {
 
     if (this.mounted && this.scroll) {
       this.scroll.scrollTo({
-        [horizontal? 'x' : 'y']: page * base,
+        [horizontal ? 'x' : 'y']: page * base,
         animated,
       });
     }
@@ -193,40 +199,40 @@ export default class Pages extends PureComponent {
   }
 
   renderPage(page, index) {
-    let { width, height, progress } = this.state;
-    let { children, horizontal, rtl } = this.props;
+    let {width, height, progress} = this.state;
+    let {children, horizontal, rtl} = this.props;
 
     let pages = Children.count(children);
 
-    let pageStyle = (horizontal && rtl)?
-      styles.rtl:
+    let pageStyle = (horizontal && rtl) ?
+      styles.rtl :
       null;
 
     /* Adjust progress by page index */
     progress = Animated.add(progress, -index);
 
     return (
-      <View style={[{ width, height }, pageStyle]}>
-        {React.cloneElement(page, { index, pages, progress })}
+      <View style={[{width, height}, pageStyle]}>
+        {React.cloneElement(page, {index, pages, progress})}
       </View>
     );
   }
 
   renderPager(pager) {
-    let { renderPager, horizontal, rtl } = this.props;
+    let {renderPager, horizontal, rtl} = this.props;
 
     if ('function' === typeof renderPager) {
-      return renderPager({ horizontal, rtl, ...pager });
+      return renderPager({horizontal, rtl, ...pager});
     }
 
-    let { indicatorPosition } = pager;
+    let {indicatorPosition} = pager;
 
     if ('none' === indicatorPosition) {
       return null;
     }
 
-    let indicatorStyle = (horizontal && rtl)?
-      styles.rtl:
+    let indicatorStyle = (horizontal && rtl) ?
+      styles.rtl :
       null;
 
     return (
@@ -237,20 +243,20 @@ export default class Pages extends PureComponent {
   }
 
   renderPages(props) {
-    let { horizontal, rtl, style, children } = this.props;
-    let { [horizontal? 'width' : 'height']: base, layout } = this.state;
+    let {horizontal, rtl, style, children} = this.props;
+    let {[horizontal ? 'width' : 'height']: base, layout} = this.state;
 
     if (!layout) {
       return null;
     }
 
-    let scrollStyle = (horizontal && rtl)?
-      styles.rtl:
+    let scrollStyle = (horizontal && rtl) ?
+      styles.rtl :
       null;
 
     let contentOffset = {
-      [horizontal? 'x' : 'y']: base * Math.floor(this.progress),
-      [horizontal? 'y' : 'x']: 0,
+      [horizontal ? 'x' : 'y']: base * Math.floor(this.progress),
+      [horizontal ? 'y' : 'x']: 0,
     };
 
     return (
@@ -269,15 +275,15 @@ export default class Pages extends PureComponent {
   }
 
   render() {
-    let { progress } = this.state;
-    let { horizontal } = this.props;
+    let {progress} = this.state;
+    let {horizontal} = this.props;
     let {
       style,
       containerStyle,
       children,
       indicatorColor,
       indicatorOpacity,
-      indicatorPosition = horizontal? 'bottom' : 'right',
+      indicatorPosition = horizontal ? 'bottom' : 'right',
       ...props
     } = this.props;
 
@@ -296,7 +302,7 @@ export default class Pages extends PureComponent {
       <View style={[styles.container, containerStyle]} onLayout={this.onLayout}>
         {this.renderPages(props)}
 
-        <Pager />
+        <Pager/>
       </View>
     );
   }
