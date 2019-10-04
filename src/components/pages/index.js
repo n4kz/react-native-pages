@@ -100,16 +100,6 @@ export default class Pages extends PureComponent {
     this.mounted = false;
   }
 
-  componentWillReceiveProps(props) {
-    let { progress } = props;
-
-    if (progress !== this.props.progress) {
-      progress.setValue(this.progress);
-
-      this.setState({ progress });
-    }
-  }
-
   onLayout(event) {
     let { width, height } = event.nativeEvent.layout;
     let { onLayout } = this.props;
