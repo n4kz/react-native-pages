@@ -65,7 +65,6 @@ export default class Pages extends PureComponent {
     this.onScroll = this.onScroll.bind(this);
     this.onScrollBeginDrag = this.onScrollBeginDrag.bind(this);
     this.onScrollEndDrag = this.onScrollEndDrag.bind(this);
-    this.renderPage = this.renderPage.bind(this);
 
     this.scrollRef = React.createRef();
 
@@ -192,9 +191,16 @@ export default class Pages extends PureComponent {
     /* Adjust progress by page index */
     progress = Animated.add(progress, -index);
 
+    let props = {
+      index,
+      pages,
+      progress,
+      collapsable: false,
+    };
+
     return (
       <View style={[{ width, height }, pageStyle]}>
-        {React.cloneElement(page, { index, pages, progress, collapsable: false })}
+        {React.cloneElement(page, props)}
       </View>
     );
   }
@@ -250,7 +256,7 @@ export default class Pages extends PureComponent {
         contentOffset={contentOffset}
         ref={this.scrollRef}
       >
-        {Children.map(children, this.renderPage)}
+        {Children.map(children, this.renderPage, this)}
       </ScrollView>
     );
   }
