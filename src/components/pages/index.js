@@ -207,7 +207,7 @@ export default class Pages extends PureComponent {
 
     return (
       <View style={[{ width, height }, pageStyle]}>
-        {React.cloneElement(page, { index, pages, progress })}
+        {React.cloneElement(page, { index, pages, progress, collapsable: false })}
       </View>
     );
   }
