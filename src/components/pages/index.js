@@ -65,9 +65,9 @@ export default class Pages extends PureComponent {
     this.onScroll = this.onScroll.bind(this);
     this.onScrollBeginDrag = this.onScrollBeginDrag.bind(this);
     this.onScrollEndDrag = this.onScrollEndDrag.bind(this);
-
-    this.updateRef = this.updateRef.bind(this, 'scroll');
     this.renderPage = this.renderPage.bind(this);
+
+    this.scrollRef = React.createRef();
 
     let { startPage, progress = new Animated.Value(startPage) } = this.props;
 
@@ -108,10 +108,6 @@ export default class Pages extends PureComponent {
 
       this.setState({ progress });
     }
-  }
-
-  updateRef(name, ref) {
-    this[name] = ref;
   }
 
   onLayout(event) {
@@ -171,13 +167,14 @@ export default class Pages extends PureComponent {
   scrollToPage(page, animated = true) {
     let { horizontal } = this.props;
     let { [horizontal? 'width' : 'height']: base } = this.state;
+    let { current: scroll } = this.scrollRef;
 
     if (animated) {
       this.scrollState = 1;
     }
 
-    if (this.mounted && this.scroll) {
-      this.scroll.scrollTo({
+    if (this.mounted && scroll) {
+      scroll.scrollTo({
         [horizontal? 'x' : 'y']: page * base,
         animated,
       });
@@ -261,7 +258,7 @@ export default class Pages extends PureComponent {
         onScrollBeginDrag={this.onScrollBeginDrag}
         onScrollEndDrag={this.onScrollEndDrag}
         contentOffset={contentOffset}
-        ref={this.updateRef}
+        ref={this.scrollRef}
       >
         {Children.map(children, this.renderPage)}
       </ScrollView>
