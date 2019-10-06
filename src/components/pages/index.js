@@ -56,6 +56,7 @@ export default class Pages extends PureComponent {
     onLayout: PropTypes.func,
     onScrollEnd: PropTypes.func,
     renderPager: PropTypes.func,
+    onHalfway: PropTypes.func,
   };
 
   constructor(props) {
@@ -73,6 +74,7 @@ export default class Pages extends PureComponent {
     this.progress = startPage;
     this.mounted = false;
     this.scrollState = -1;
+    this.activeIndex = startPage;
 
     this.state = {
       layout: false,
@@ -123,6 +125,11 @@ export default class Pages extends PureComponent {
 
     let discreteProgress = Math.round(this.progress);
 
+    if(this.activeIndex !== discreteProgress) {
+      this.activeIndex = discreteProgress;
+      this.onHalfway(discreteProgress);
+    }
+
     if (1 === this.scrollState && equal(discreteProgress, this.progress)) {
       this.onScrollEnd();
 
@@ -151,6 +158,15 @@ export default class Pages extends PureComponent {
     if ('function' === typeof onScrollEnd) {
       onScrollEnd(Math.round(this.progress));
     }
+  }
+
+  onHalfway(nextIndex) {
+    let { onHalfway } = this.props;
+
+    if('function' === typeof onHalfway && nextIndex >= 0) {
+      onHalfway(nextIndex);
+    }
+    
   }
 
   scrollToPage(page, animated = true) {
