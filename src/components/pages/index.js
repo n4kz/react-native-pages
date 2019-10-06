@@ -127,7 +127,6 @@ export default class Pages extends PureComponent {
     let discreteProgress = Math.round(this.progress);
 
     if (this.activeIndex !== discreteProgress) {
-      this.activeIndex = discreteProgress;
       this.onHalfway(discreteProgress);
     }
 
@@ -165,8 +164,10 @@ export default class Pages extends PureComponent {
     let { onHalfway } = this.props;
 
     if ('function' === typeof onHalfway && nextIndex >= 0) {
-      onHalfway(nextIndex);
+      onHalfway(nextIndex, this.activeIndex);
     }
+
+    this.activeIndex = nextIndex;
   }
 
   scrollToPage(page, animated = true) {
