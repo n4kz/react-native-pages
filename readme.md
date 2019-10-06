@@ -68,8 +68,8 @@ class Example extends Component {
  containerStyle    | Style for container view               |   Object | -
  progress          | Animated.Value updated with progress   |   Object | -
  onScrollEnd       | Scroll end callback                    | Function | -
- renderPager       | Render pager callback                  | Function | -
  onHalfway         | Dominant page change callback          | Function | -
+ renderPager       | Render pager callback                  | Function | -
 
 Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and `left`
 
@@ -134,4 +134,4 @@ npm run ios # or npm run android
 
 BSD License
 
-Copyright 2017-2018 Alexander Nazarov. All rights reserved.
+Copyright 2017-2019 Alexander Nazarov. All rights reserved.
