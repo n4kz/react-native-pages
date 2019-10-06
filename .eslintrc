@@ -1,18 +1,14 @@
 {
   'parser': 'babel-eslint',
 
-
-  'globals': {
-    'require': true,
-    'requestAnimationFrame',
-  },
-
   'env': {
     'es6': true,
+    'react-native/react-native': true,
   },
 
   'plugins': [
-    'react'
+    'react',
+    'react-native'
   ],
 
   'extends': [
@@ -22,7 +18,7 @@
 
   'settings': {
     'react': {
-      'version': 'detect',
+      'version': '16.9',
     },
   },
 
@@ -195,9 +191,21 @@
       'named': 'never',
       'asyncArrow': 'always',
     }],
+
+    /*
+     * foo('bar');
+     */
     'space-in-parens': ['error', 'never'],
 
+    /*
+     * switch (a) {
+     *   case 0: break;
+     * }
+     */
     'switch-colon-spacing': ['error', { 'after': true, 'before': false }],
+
+    'react-native/no-unused-styles': ['warn'],
+    'react-native/no-inline-styles': ['warn'],
   },
 }
 
