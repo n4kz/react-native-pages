@@ -120,7 +120,12 @@ export default function init() {
             <Label color='#FF9100' backgroundColor='#263238' text='things' effect='slide' />
           </Pages>
 
-          <Pages horizontal={false} indicatorPosition='left' indicatorColor='#FF9100' indicatorOpacity={0.54}>
+          <Pages
+            horizontal={false}
+            indicatorPosition='left'
+            indicatorColor='#FF9100'
+            indicatorOpacity={0.54}
+          >
             <Image source={require('./assets/b-1.png')} style={imageStyle} />
             <Image source={require('./assets/b-2.png')} style={imageStyle} />
             <Image source={require('./assets/b-3.png')} style={imageStyle} />

@@ -293,14 +293,15 @@ export default class Pages extends PureComponent {
 
     let pages = Children.count(children);
 
-    let Pager = () =>
+    let Pager = () => (
       this.renderPager({
         pages,
         progress,
         indicatorColor,
         indicatorOpacity,
         indicatorPosition,
-      });
+      })
+    );
 
     return (
       <View style={[styles.container, containerStyle]} onLayout={this.onLayout}>

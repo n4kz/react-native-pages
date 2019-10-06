@@ -47,9 +47,7 @@ export default class Indicator extends PureComponent {
     });
 
     let flexDirection = /^(top|bottom)$/
-      .test(indicatorPosition)?
-        'row':
-        'column';
+      .test(indicatorPosition)? 'row' : 'column';
 
     return (
       <View style={[styles.container, { flexDirection }, style]} {...props}>
