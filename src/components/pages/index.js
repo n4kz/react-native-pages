@@ -1,6 +1,13 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Children } from 'react';
-import { View, ScrollView, Animated, Platform, ViewPropTypes } from 'react-native';
+import {
+  View,
+  ScrollView,
+  SafeAreaView,
+  Animated,
+  Platform,
+  ViewPropTypes,
+} from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -240,9 +247,9 @@ export default class Pages extends PureComponent {
       null;
 
     return (
-      <View style={[styles[indicatorPosition], indicatorStyle]}>
+      <SafeAreaView style={[styles[indicatorPosition], indicatorStyle]}>
         <Indicator {...pager} />
-      </View>
+      </SafeAreaView>
     );
   }
 
