@@ -1,0 +1,4 @@
+os: osx
+language: node_js
+
+script: npm run lint
