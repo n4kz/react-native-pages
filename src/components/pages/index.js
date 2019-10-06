@@ -246,8 +246,10 @@ export default class Pages extends PureComponent {
       styles.rtl:
       null;
 
+    let style = [styles[indicatorPosition], indicatorStyle];
+
     return (
-      <SafeAreaView style={[styles[indicatorPosition], indicatorStyle]}>
+      <SafeAreaView style={style} pointerEvents='none'>
         <Indicator {...pager} />
       </SafeAreaView>
     );
