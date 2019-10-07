@@ -24,7 +24,7 @@ export default class Pages extends PureComponent {
     nestedScrollEnabled: true,
     showsHorizontalScrollIndicator: false,
     showsVerticalScrollIndicator: false,
-    scrollEventThrottle: 30,
+    scrollEventThrottle: 25,
     scrollsToTop: false,
 
     indicatorColor: 'rgb(255, 255, 255)',
