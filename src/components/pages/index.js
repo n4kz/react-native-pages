@@ -21,6 +21,7 @@ function equal(a, b) {
 export default class Pages extends PureComponent {
   static defaultProps = {
     pagingEnabled: true,
+    nestedScrollEnabled: true,
     showsHorizontalScrollIndicator: false,
     showsVerticalScrollIndicator: false,
     scrollEventThrottle: 30,
