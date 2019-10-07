@@ -70,6 +70,7 @@ class Example extends Component {
  indicatorPosition | Page indicator position                |   String | bottom
  containerStyle    | Style for container view               |   Object | -
  progress          | Animated.Value updated with progress   |   Object | -
+ onScrollStart     | Scroll start callback                  | Function | -
  onScrollEnd       | Scroll end callback                    | Function | -
  onHalfway         | Dominant page change callback          | Function | -
  renderPager       | Render pager callback                  | Function | -
