@@ -62,6 +62,7 @@ export default class Pages extends PureComponent {
     ]),
 
     onLayout: PropTypes.func,
+    onScrollStart: PropTypes.func,
     onScrollEnd: PropTypes.func,
     onHalfway: PropTypes.func,
 
@@ -146,6 +147,12 @@ export default class Pages extends PureComponent {
   }
 
   onScrollBeginDrag() {
+    let { onScrollStart } = this.props;
+
+    if ('function' === typeof onScrollStart) {
+      onScrollStart(Math.round(this.progress));
+    }
+
     this.scrollState = 0;
   }
 
