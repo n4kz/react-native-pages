@@ -87,22 +87,34 @@ Possible values for `indicatorPosition` are `none`, `top`, `right`, `bottom` and
 ## Replacing page indicator
 
 ```javascript
+import { Indicator, Pages } from 'react-native-pages';
+
 class Example extends Component {
-  renderPager({ pages, progress, indicatorPosition }) {
+  _renderPager = (options) => {
+    let {
+      rtl,
+      pages,
+      progress,
+      horizontal,
+      indicatorColor,
+      indicatorOpacity,
+      indicatorPosition,
+    } = options;
+
     if ('none' === indicatorPosition) {
       return null;
     }
 
     return (
-      <MyIndicator pages={pages} progress={progress} position={indicatorPosition} />
+      <Indicator {...options} />
     );
-  }
+  };
 
   render() {
     let { children, ...props } = this.props;
 
     return (
-      <Pages {...props} renderPager={this.renderPager.bind(this)}>
+      <Pages {...props} renderPager={this._renderPager}>
         {children}
       </Pages>
     );
