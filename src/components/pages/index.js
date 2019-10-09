@@ -223,7 +223,7 @@ export default class Pages extends PureComponent {
     var dimension = !horizontal ? Math.ceil(layoutMeasurement.height) : Math.ceil(layoutMeasurement.width);
     return Math.ceil(position/dimension);
   }
-  
+
   renderPage(page, index) {
     let { width, height, progress } = this.state;
     let { children, horizontal, rtl } = this.props;
