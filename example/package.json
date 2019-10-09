@@ -3,15 +3,18 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
-    "android": "node node_modules/react-native/local-cli/cli.js run-android"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start"
   },
   "dependencies": {
-    "react": "16.2.0",
-    "react-native": "0.53.0",
-    "react-native-pages": "file:../"
+    "react": "16.9.0",
+    "react-native": "0.61.2",
+    "react-native-pages": "*"
   },
   "devDependencies": {
-    "babel-preset-react-native": "4.0.0"
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "metro-react-native-babel-preset": "^0.56.0"
   }
 }
