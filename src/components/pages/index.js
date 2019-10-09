@@ -11,6 +11,11 @@ function equal(a, b) {
   return Math.abs(a - b) <= floatEpsilon * Math.max(Math.abs(a), Math.abs(b));
 }
 
+const position = {
+  next: 'next',
+  previous: 'previous'
+}
+
 export default class Pages extends PureComponent {
   static defaultProps = {
     pagingEnabled: true,
@@ -26,6 +31,7 @@ export default class Pages extends PureComponent {
 
     horizontal: true,
     rtl: false,
+    onLastPageReached: () => {}
   };
 
   static propTypes = {
@@ -55,6 +61,7 @@ export default class Pages extends PureComponent {
 
     onLayout: PropTypes.func,
     onScrollEnd: PropTypes.func,
+    onLastPageReached: PropTypes.func,
     renderPager: PropTypes.func,
   };
 
@@ -140,9 +147,13 @@ export default class Pages extends PureComponent {
 
     if (1 === this.scrollState && equal(discreteProgress, this.progress)) {
       this.onScrollEnd();
-
+      this.currentChildNum = this.pageNumber(event.nativeEvent);
       this.scrollState = -1;
     }
+
+    var currentOffset = offset;
+    this.direction = currentOffset > this.offset ? position.next : position.previous;
+    this.offset = currentOffset;
   }
 
   onScrollBeginDrag() {
@@ -150,11 +161,15 @@ export default class Pages extends PureComponent {
   }
 
   onScrollEndDrag() {
-    let { horizontal } = this.props;
+    let { horizontal, children, onLastPageReached } = this.props;
 
     /* Vertical pagination is not working on android, scroll by hands */
-    if ('android' === Platform.OS && !horizontal) {
+    /*if ('android' === Platform.OS && !horizontal) {
       this.scrollToPage(Math.round(this.progress));
+    }*/
+
+    if(this.currentChildNum == Children.count(children) - 1 && this.direction == position.next) {
+      onLastPageReached();
     }
 
     this.scrollState = 1;
@@ -192,6 +207,13 @@ export default class Pages extends PureComponent {
     return 1 === this.scrollState;
   }
 
+  pageNumber = ({layoutMeasurement, contentOffset}) => {
+    let { horizontal } = this.props;
+    var position = !horizontal ? Math.ceil(contentOffset.y) : Math.ceil(contentOffset.x)
+    var dimension = !horizontal ? Math.ceil(layoutMeasurement.height) : Math.ceil(layoutMeasurement.width)
+    return Math.ceil(position/dimension)
+  }
+  
   renderPage(page, index) {
     let { width, height, progress } = this.state;
     let { children, horizontal, rtl } = this.props;
