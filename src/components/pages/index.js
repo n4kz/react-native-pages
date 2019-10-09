@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Children } from 'react';
-import {
-  View,
-  ScrollView,
-  SafeAreaView,
-  Animated,
-  Platform,
-  ViewPropTypes,
-} from 'react-native';
+import { View, ScrollView, Animated, ViewPropTypes } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -39,7 +32,7 @@ export default class Pages extends PureComponent {
 
     horizontal: true,
     rtl: false,
-    onLastPageReached: () => {}
+    onLastPageReached: () => {},
   };
 
   static propTypes = {
@@ -167,14 +160,14 @@ export default class Pages extends PureComponent {
   }
 
   onScrollEndDrag() {
-    let { horizontal, children, onLastPageReached } = this.props;
+    let { children, onLastPageReached } = this.props;
 
     /* Vertical pagination is not working on android, scroll by hands */
     /*if ('android' === Platform.OS && !horizontal) {
       this.scrollToPage(Math.round(this.progress));
     }*/
 
-    if(this.currentChildNum == Children.count(children) - 1 && this.direction == position.next) {
+    if (this.currentChildNum == Children.count(children) - 1 && this.direction == position.next) {
       onLastPageReached();
     }
 
@@ -224,11 +217,11 @@ export default class Pages extends PureComponent {
     return 1 === this.scrollState;
   }
 
-  pageNumber = ({layoutMeasurement, contentOffset}) => {
+  pageNumber = ( { layoutMeasurement, contentOffset } ) => {
     let { horizontal } = this.props;
-    var position = !horizontal ? Math.ceil(contentOffset.y) : Math.ceil(contentOffset.x)
-    var dimension = !horizontal ? Math.ceil(layoutMeasurement.height) : Math.ceil(layoutMeasurement.width)
-    return Math.ceil(position/dimension)
+    var position = !horizontal ? Math.ceil(contentOffset.y) : Math.ceil(contentOffset.x);
+    var dimension = !horizontal ? Math.ceil(layoutMeasurement.height) : Math.ceil(layoutMeasurement.width);
+    return Math.ceil(position/dimension);
   }
   
   renderPage(page, index) {
