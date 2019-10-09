@@ -13,7 +13,7 @@ function equal(a, b) {
 
 const position = {
   next: 'next',
-  previous: 'previous'
+  previous: 'previous',
 }
 
 export default class Pages extends PureComponent {
