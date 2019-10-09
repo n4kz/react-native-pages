@@ -1,6 +1,6 @@
 {
   "name": "react-native-pages",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "license": "BSD-3-Clause",
   "author": "Alexander Nazarov <n4kz@n4kz.com>",
   "description": "Easy to use page view component",
@@ -16,6 +16,7 @@
     "swiper"
   ],
   "main": "index.js",
+  "files": ["index.js", "src/*", "license.txt", "readme.md"],
   "repository": {
     "type": "git",
     "url": "git://github.com/n4kz/react-native-pages.git"
@@ -25,14 +26,15 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.0",
-    "eslint": "^4.8.0",
-    "eslint-plugin-react": "^7.0.0"
+    "babel-eslint": "^10.0.0",
+    "eslint": "^6.5.0",
+    "eslint-plugin-react": "^7.16.0",
+    "eslint-plugin-react-native": "^3.7.0"
   },
   "dependencies": {
     "prop-types": "^15.5.9"
   },
   "scripts": {
-    "lint": "eslint src example/app.js"
+    "lint": "eslint index.js src example/app.js"
   }
 }

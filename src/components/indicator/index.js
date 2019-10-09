@@ -34,20 +34,9 @@ export default class Indicator extends PureComponent {
     let dots = Array.from(new Array(pages), (page, index) => {
       let opacity = progress
         .interpolate({
-          inputRange: [
-            -Infinity,
-            index - 1,
-            index,
-            index + 1,
-            Infinity,
-          ],
-          outputRange: [
-            indicatorOpacity,
-            indicatorOpacity,
-            1.0,
-            indicatorOpacity,
-            indicatorOpacity,
-          ],
+          inputRange: [index - 1, index, index + 1],
+          outputRange: [indicatorOpacity, 1.0, indicatorOpacity],
+          extrapolate: 'clamp',
         });
 
       let style = { opacity, backgroundColor };
@@ -58,9 +47,7 @@ export default class Indicator extends PureComponent {
     });
 
     let flexDirection = /^(top|bottom)$/
-      .test(indicatorPosition)?
-        'row':
-        'column';
+      .test(indicatorPosition)? 'row' : 'column';
 
     return (
       <View style={[styles.container, { flexDirection }, style]} {...props}>
