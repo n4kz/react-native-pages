@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Children } from 'react';
-import { View, ScrollView, Animated, ViewPropTypes } from 'react-native';
+import { View, ScrollView, Animated, ViewPropTypes, SafeAreaView } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -217,7 +217,7 @@ export default class Pages extends PureComponent {
     return 1 === this.scrollState;
   }
 
-  pageNumber = ( { layoutMeasurement, contentOffset } ) => {
+  pageNumber =({ layoutMeasurement, contentOffset })=> {
     let { horizontal } = this.props;
     var position = !horizontal ? Math.ceil(contentOffset.y) : Math.ceil(contentOffset.x);
     var dimension = !horizontal ? Math.ceil(layoutMeasurement.height) : Math.ceil(layoutMeasurement.width);
