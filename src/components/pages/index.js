@@ -1,13 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent, Children } from 'react';
-import {
-  View,
-  ScrollView,
-  SafeAreaView,
-  Animated,
-  Platform,
-  ViewPropTypes,
-} from 'react-native';
+import { View, ScrollView, Animated, ViewPropTypes, SafeAreaView } from 'react-native';
 
 import Indicator from '../indicator';
 import styles from './styles';
@@ -16,6 +9,11 @@ const floatEpsilon = Math.pow(2, -23);
 
 function equal(a, b) {
   return Math.abs(a - b) <= floatEpsilon * Math.max(Math.abs(a), Math.abs(b));
+}
+
+const position = {
+  next: 'next',
+  previous: 'previous',
 }
 
 export default class Pages extends PureComponent {
@@ -34,6 +32,7 @@ export default class Pages extends PureComponent {
 
     horizontal: true,
     rtl: false,
+    onLastPageReached: () => {},
   };
 
   static propTypes = {
@@ -64,8 +63,8 @@ export default class Pages extends PureComponent {
     onLayout: PropTypes.func,
     onScrollStart: PropTypes.func,
     onScrollEnd: PropTypes.func,
+    onLastPageReached: PropTypes.func,
     onHalfway: PropTypes.func,
-
     renderPager: PropTypes.func,
   };
 
@@ -141,9 +140,13 @@ export default class Pages extends PureComponent {
 
     if (1 === this.scrollState && equal(discreteProgress, this.progress)) {
       this.onScrollEnd();
-
+      this.currentChildNum = this.pageNumber(event.nativeEvent);
       this.scrollState = -1;
     }
+
+    var currentOffset = offset;
+    this.direction = currentOffset > this.offset ? position.next : position.previous;
+    this.offset = currentOffset;
   }
 
   onScrollBeginDrag() {
@@ -157,11 +160,15 @@ export default class Pages extends PureComponent {
   }
 
   onScrollEndDrag() {
-    let { horizontal } = this.props;
+    let { children, onLastPageReached } = this.props;
 
     /* Vertical pagination is not working on android, scroll by hands */
-    if ('android' === Platform.OS && !horizontal) {
+    /*if ('android' === Platform.OS && !horizontal) {
       this.scrollToPage(Math.round(this.progress));
+    }*/
+
+    if (this.currentChildNum == Children.count(children) - 1 && this.direction == position.next) {
+      onLastPageReached();
     }
 
     this.scrollState = 1;
@@ -208,6 +215,13 @@ export default class Pages extends PureComponent {
 
   isDecelerating() {
     return 1 === this.scrollState;
+  }
+
+  pageNumber =({ layoutMeasurement, contentOffset })=> {
+    let { horizontal } = this.props;
+    var position = !horizontal ? Math.ceil(contentOffset.y) : Math.ceil(contentOffset.x);
+    var dimension = !horizontal ? Math.ceil(layoutMeasurement.height) : Math.ceil(layoutMeasurement.width);
+    return Math.ceil(position/dimension);
   }
 
   renderPage(page, index) {
