@@ -28,6 +28,7 @@ export default class Indicator extends PureComponent {
       indicatorOpacity,
       indicatorPosition,
       style,
+      dotStyle,
       ...props
     } = this.props;
 
@@ -39,7 +40,7 @@ export default class Indicator extends PureComponent {
           extrapolate: 'clamp',
         });
 
-      let style = { opacity, backgroundColor };
+      let style = { opacity, backgroundColor, ...dotStyle };
 
       return (
         <Animated.View style={[styles.dot, style]} key={index} />
