@@ -10,6 +10,7 @@ export default class Indicator extends PureComponent {
 
     pages: PropTypes.number.isRequired,
     progress: PropTypes.instanceOf(Animated.Value).isRequired,
+    dotStyle: ViewPropTypes.style,
     indicatorColor: PropTypes.string.isRequired,
     indicatorOpacity: PropTypes.number.isRequired,
     indicatorPosition: PropTypes.oneOf([
