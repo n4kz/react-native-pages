@@ -10,6 +10,7 @@ export default class Indicator extends PureComponent {
 
     pages: PropTypes.number.isRequired,
     progress: PropTypes.instanceOf(Animated.Value).isRequired,
+    dotStyle: ViewPropTypes.style,
     indicatorColor: PropTypes.string.isRequired,
     indicatorOpacity: PropTypes.number.isRequired,
     indicatorPosition: PropTypes.oneOf([
@@ -28,6 +29,7 @@ export default class Indicator extends PureComponent {
       indicatorOpacity,
       indicatorPosition,
       style,
+      dotStyle,
       ...props
     } = this.props;
 
@@ -39,7 +41,7 @@ export default class Indicator extends PureComponent {
           extrapolate: 'clamp',
         });
 
-      let style = { opacity, backgroundColor };
+      let style = { opacity, backgroundColor, ...dotStyle };
 
       return (
         <Animated.View style={[styles.dot, style]} key={index} />
