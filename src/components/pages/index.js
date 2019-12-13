@@ -211,6 +211,11 @@ export default class Pages extends PureComponent {
   }
 
   renderPage(page, index) {
+    
+    if(!page) {
+      return <></>
+    }
+    
     let { width, height, progress } = this.state;
     let { children, horizontal, rtl } = this.props;
 
