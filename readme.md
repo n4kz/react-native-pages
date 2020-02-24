@@ -43,6 +43,7 @@ npm install --save react-native-pages
 
 ```javascript
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { Pages } from 'react-native-pages';
 
 class Example extends Component {
