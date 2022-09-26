@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { PureComponent } from 'react';
-import { View, Animated, ViewPropTypes } from 'react-native';
+import { View, Animated } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 import styles from './styles';
 

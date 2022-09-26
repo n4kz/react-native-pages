@@ -6,8 +6,8 @@ import {
   SafeAreaView,
   Animated,
   Platform,
-  ViewPropTypes,
 } from 'react-native';
+import { ViewPropTypes } from 'deprecated-react-native-prop-types';
 
 import Indicator from '../indicator';
 import styles from './styles';
